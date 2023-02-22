@@ -1,0 +1,115 @@
+<!-------------------------------------------->
+<!---------------- EDIT MODE ----------------->
+<ng-container *ngIf="editMode; else viewMode">
+  <div class="row">
+    <div class="col-10">
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="descriptionTXT"
+          placeholder="Descripción"
+          [(ngModel)]="bag.description">
+        <label for="descriptionTXT" class="form-label">Descripción</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="number"
+          class="form-control"
+          id="targetAmountTXT"
+          placeholder="Monto objetivo"
+          [(ngModel)]="bag.targetAmount">
+        <label for="targetAmountTXT" class="form-label">Monto objetivo</label>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <app-button
+        (click)="openModalEdit(modalEdit)"
+        [type]="'button'"
+        [class]="'btn btn-success mb-3'"
+        [icon]="'bi bi-hdd-fill'"
+      ></app-button>
+
+      <app-button
+        (click)="getEdit(false)"
+        [type]="'button'"
+        [class]="'btn btn-danger'"
+        [icon]="'bi bi-x-circle-fill'"
+      ></app-button>
+    </div>
+  </div>
+
+  <hr class="text-muted">
+</ng-container>
+
+<!--------------------------------------->
+<!------------- MODAL EDIT -------------->
+<ng-template #modalEdit let-modal>
+  <div class="modal-body text-center">
+    <p class="lead">¿Desea guardar los cambios?</p>
+
+    <app-button
+      (click)="modal.dismiss('Cross click')"
+      [type]="'button'"
+      [class]="'btn btn-danger me-2'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Cancelar'"
+    ></app-button>
+
+    <app-button
+      (click)="onSave(bag)"
+      [type]="'button'"
+      [class]="'btn btn-success'"
+      [icon]="'bi bi-hdd-fill me-1'"
+      [label]="'Guardar'"
+    ></app-button>
+  </div>
+</ng-template>
+
+
+<!-------------------------------------->
+<!------------- VIEW MODE -------------->
+<ng-template #viewMode>
+  <div class="row mb-3">
+    <div class="col-10">
+      <p class="display-6">{{bag.description}}</p>
+      <p class="mb-1 text-muted">
+        <i class="bi bi-person-circle me-1"></i>
+        {{bag.userDisplayName}}
+      </p>
+      <p class="text-muted">
+        <i class="bi bi-calendar2-week me-1"></i>
+        2 de mayo de 2022
+      </p>
+    </div>
+    <div class="col-2">
+      <app-button
+        (click)="getEdit(true)"
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [icon]="'bi bi-pencil-square'"
+      ></app-button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-end">
+      <p class="mb-1" [ngStyle]="{'color': bag.collectedAmount < bag.targetAmount ? 'red':'green'}">
+        Monto recolectado: &nbsp; <span class="lead fw-bold"> S/. {{bag.collectedAmount}}</span></p>
+      <p class="mb-1">Monto objetivo: &nbsp; <span class="lead fw-bold"> S/. {{bag.targetAmount}}</span></p>
+    </div>
+  </div>
+
+  <hr class="text-muted">
+
+</ng-template>
+
+
+<!------------------------------------------>
+<!------------- LIST EXPENSES -------------->
+<app-list-expenses
+  [bag]="bag"
+  [user]="user"
+></app-list-expenses>

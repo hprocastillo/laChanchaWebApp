@@ -1,0 +1,88 @@
+<!---------------------------------------->
+<!---------------- BAGS ------------------>
+<ng-container *ngIf="listBagsTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BUTTON FRIENDS -->
+      <app-button
+        (click)="goFriends()"
+        [type]="'button'"
+        [class]="'btn btn-warning'"
+        [icon]="'bi bi-people-fill me-1'"
+        [label]="'Amigos'"
+      ></app-button>
+
+      <!-- BUTTON NEW BAG -->
+      <app-button
+        (click)="goNewBag()"
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [icon]="'bi bi-piggy-bank-fill me-1'"
+        [label]="'Nueva Chancha'"
+      ></app-button>
+
+    </div>
+  </div>
+</ng-container>
+
+
+
+<!-------------------------------------------->
+<!---------------- VIEW BAG ------------------>
+<ng-container *ngIf="viewBagTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goBackToListBagsTemplate()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+
+      <!-- BUTTON NEW EXPENSE -->
+      <app-button
+        (click)="goNewExpense()"
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [icon]="'bi bi-cash-coin me-1'"
+        [label]="'Nuevo gasto'"
+      ></app-button>
+
+    </div>
+  </div>
+</ng-container>
+
+
+
+
+<!------------------------------------------->
+<!---------------- FRIENDS ------------------>
+<ng-container *ngIf="listFriendsTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goBackToListBagsTemplate()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+
+      <!-- BUTTON NEW FRIEND -->
+      <app-button
+        (click)="goNewFriend()"
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [icon]="'bi bi-person-fill-add me-1'"
+        [label]="'Agregar amigo'"
+      ></app-button>
+
+    </div>
+  </div>
+</ng-container>

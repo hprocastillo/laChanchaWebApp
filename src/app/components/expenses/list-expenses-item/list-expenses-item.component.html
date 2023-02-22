@@ -1,0 +1,47 @@
+<div class="row">
+  <!-- BUTTON OPEN TOOLBAR -->
+  <div class="col-1">
+    <i *ngIf="!toolbar" (click)="openToolbar(true)" class="bi bi-caret-down-fill"></i>
+    <i *ngIf="toolbar" (click)="openToolbar(false)" class="bi bi-caret-up-fill"></i>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="col-7 text-start">
+    <p class="fw-bold">{{expense.description}}</p>
+  </div>
+
+  <!-- AMOUNT -->
+  <div class="col-4 text-end">
+    <p class="fw-bold">S/. {{expense.amount}}</p>
+  </div>
+</div>
+
+<ng-container *ngIf="toolbar">
+  <div class="row">
+    <div class="col-11 offset-1">
+      <app-button
+        [type]="'button'"
+        [class]="'btn btn-danger me-2'"
+        [icon]="'bi bi-trash-fill'"
+      ></app-button>
+
+      <app-button
+        (click)="openModalReceipt(modalReceipt)"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-receipt'"
+      ></app-button>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-template #modalReceipt let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body text-center">
+    <img *ngIf="expense.receiptUrl" style="max-width: 300px" [src]="[expense.receiptUrl]" alt="">
+    <p *ngIf="!expense.receiptUrl">No hay recibo adjunto.</p>
+  </div>
+</ng-template>

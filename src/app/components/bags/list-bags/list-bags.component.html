@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-12">
+    <ul class="list-group list-group-flush">
+
+      <li style="cursor: pointer" class="list-group-item" *ngFor="let bag of listBags" (click)="getSelectedBag(bag)">
+        <app-list-bags-item [bag]="bag"></app-list-bags-item>
+      </li>
+
+    </ul>
+  </div>
+</div>

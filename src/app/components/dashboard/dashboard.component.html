@@ -1,0 +1,55 @@
+<ng-container *ngIf="authService.user$ | async as user">
+
+  <!-------------------------------->
+  <!----------- LIST BAGS ---------->
+  <app-list-bags
+    *ngIf="listBagsTemplate"
+    (selectedBag)="getSelectedBag($event)"
+  ></app-list-bags>
+
+  <!-------------------------------->
+  <!----------- NEW BAG ------------>
+  <app-new-bag
+    *ngIf="newBagTemplate"
+    [user]="user"
+    (btnBack)="showListBagsTemplate()"
+  ></app-new-bag>
+
+
+  <!--------------------------------->
+  <!----------- VIEW BAG ------------>
+  <app-view-bag
+    *ngIf="viewBagTemplate"
+    [user]="user"
+    [bag]="selectedBag"
+  ></app-view-bag>
+
+
+  <!------------------------------------>
+  <!----------- NEW EXPENSE ------------>
+  <app-new-expense
+    *ngIf="newExpenseTemplate"
+    [user]="user"
+    [bag]="selectedBag"
+
+    (btnBackToViewBag)="showViewBagTemplate()"
+  ></app-new-expense>
+
+
+  <!-------------------------------->
+  <!---------- BUTTON BAR ---------->
+  <app-button-bar
+    *ngIf="buttonBarTemplate"
+
+    [listBagsTemplate]="listBagsTemplate"
+    [listFriendsTemplate]="listFriendsTemplate"
+    [viewBagTemplate]="viewBagTemplate"
+
+
+    (btnFriends)="showListFriendsTemplate()"
+    (btnNewBag)="showNewBagTemplate()"
+    (btnNewExpense)="showNewExpenseTemplate()"
+    (btnBackToListBags)="showListBagsTemplate()"
+  ></app-button-bar>
+
+</ng-container>

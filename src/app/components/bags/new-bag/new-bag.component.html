@@ -1,0 +1,58 @@
+<form [formGroup]="newBagForm" (ngSubmit)="onSubmit()">
+
+  <!------------ TITLE -------------->
+  <div class="form-floating mb-3">
+    <p class="display-5 mb-3">Nueva Chancha</p>
+  </div>
+
+  <!------------ DESCRIPTION -------------->
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="descriptionTXT"
+      placeholder="Descripción"
+      formControlName="description"
+      required>
+    <label for="descriptionTXT">Descripción</label>
+  </div>
+
+
+  <!----------- TARGET AMOUNT ------------>
+  <div class="form-floating mb-2">
+    <input
+      type="number"
+      class="form-control"
+      id="amountTXT"
+      placeholder="Monto objetivo S/."
+      formControlName="targetAmount"
+      required>
+    <label for="amountTXT">Monto objetivo S/.</label>
+  </div>
+
+
+  <!----------------------------------------->
+  <!---------------- BUTTONS ---------------->
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BUTTON CANCEL -->
+      <app-button
+        (click)="goBack()"
+        [type]="'button'"
+        [class]="'btn btn-danger'"
+        [icon]="'bi bi-x-circle-fill me-1'"
+        [label]="'Cancelar'"
+      ></app-button>
+
+      <!-- BUTTON SAVE -->
+      <app-button
+        [type]="'submit'"
+        [class]="'btn btn-success'"
+        [icon]="'bi bi-hdd-fill me-1'"
+        [label]="'Guardar'"
+      ></app-button>
+
+    </div>
+  </div>
+</form>

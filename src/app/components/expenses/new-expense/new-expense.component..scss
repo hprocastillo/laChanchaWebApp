@@ -1,0 +1,14 @@
+.container-camera {
+  width: 60%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container-camera input[type=file] {
+  top: 0;
+  left: 0;
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+}

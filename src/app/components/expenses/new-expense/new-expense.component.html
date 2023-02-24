@@ -19,7 +19,7 @@
 
 
   <!-----------  AMOUNT ------------>
-  <div class="form-floating mb-2">
+  <div class="form-floating mb-3">
     <input
       type="number"
       class="form-control"
@@ -29,6 +29,55 @@
       required>
     <label for="amountTXT">Monto S/.</label>
   </div>
+
+
+  <!----------- CAPTURE IMAGE FILE ------------>
+  <ng-container *ngIf="!imagePreview">
+    <div class="row mb-3">
+      <div class="col-12">
+        <p class="lead">Adjuntar recibo</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 d-flex justify-content-center">
+        <div class="container-camera text-center">
+          <input
+            (change)="showPreview($event)"
+            type="file"
+            accept="image/*;capture=camera">
+          <img src="./assets/images/camera.png" alt="camera">
+          <p class="text-muted">Tomar Foto</p>
+        </div>
+      </div>
+      <div class="col-6 d-flex justify-content-center border-start">
+        <div class="container-camera text-center">
+          <input
+            (change)="showPreview($event)"
+            type="file"
+            accept="image/*">
+          <img src="./assets/images/upload.png" alt="camera">
+          <p class="text-muted">Subir imagen</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <!----------- IMAGE PREVIEW ------------>
+  <ng-container *ngIf="imagePreview && imagePreview !== ''">
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="lead">Imagen Previa</p>
+        <img style="max-width: 250px;" [src]="[imagePreview]" alt="">
+        <app-button
+          (click)="deletePreview()"
+          [type]="'button'"
+          [class]="'btn btn-danger ms-2'"
+          [icon]="'bi bi-trash-fill'"
+        ></app-button>
+      </div>
+    </div>
+  </ng-container>
 
 
   <!----------------------------------------->
@@ -45,8 +94,16 @@
         [label]="'Cancelar'"
       ></app-button>
 
+      <!-- BUTTON SAVE LOADING -->
+      <app-button-save-loading
+        *ngIf="loadingEffect"
+        [type]="'button'"
+        [class]="'btn btn-success'"
+      ></app-button-save-loading>
+
       <!-- BUTTON SAVE -->
       <app-button
+        *ngIf="!loadingEffect"
         [type]="'submit'"
         [class]="'btn btn-success'"
         [icon]="'bi bi-hdd-fill me-1'"

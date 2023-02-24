@@ -7,4 +7,5 @@ export const environment = {
     apiKey: 'AIzaSyBNb-iLyH_9P2FOknLIWFJ8bHRISlqH3s0',
     authDomain: 'lachanchaapp.firebaseapp.com',
     messagingSenderId: '1062972250876',
-  },};
+  },
+};

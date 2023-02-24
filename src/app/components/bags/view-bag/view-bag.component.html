@@ -81,15 +81,21 @@
       </p>
       <p class="text-muted">
         <i class="bi bi-calendar2-week me-1"></i>
-        2 de mayo de 2022
+        {{bag.createdAt.toDate() | date:'MMM d, y'}}
       </p>
     </div>
     <div class="col-2">
       <app-button
         (click)="getEdit(true)"
         [type]="'button'"
-        [class]="'btn btn-primary'"
+        [class]="'btn btn-primary mb-3'"
         [icon]="'bi bi-pencil-square'"
+      ></app-button>
+
+      <app-button
+        [type]="'button'"
+        [class]="'btn btn-warning'"
+        [icon]="'bi bi-share-fill'"
       ></app-button>
     </div>
   </div>

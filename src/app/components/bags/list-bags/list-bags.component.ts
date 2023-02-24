@@ -1,7 +1,8 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BagService} from "../../../services/bag.service";
 import {Bag} from "../../../interfaces/bag";
 import {Subject, takeUntil} from "rxjs";
+import {User} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-list-bags',
@@ -9,6 +10,7 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class ListBagsComponent implements OnInit, OnDestroy {
   //INPUTS AND OUTPUTS
+  @Input() user = {} as User;
   @Output() selectedBag = new EventEmitter<Bag>();
 
   //VARIABLES
@@ -24,7 +26,9 @@ export class ListBagsComponent implements OnInit, OnDestroy {
     this.bagService.getBags()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.listBags = res;
+        this.listBags = res.filter(item => {
+          return item.userId === this.user.uid;
+        });
       });
   }
 

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BagService} from "../../../services/bag.service";
 import {Bag} from "../../../interfaces/bag";
 import {User} from "@angular/fire/auth";
+import {Timestamp} from "firebase/firestore";
 
 @Component({
   selector: 'app-new-bag',
@@ -36,7 +37,7 @@ export class NewBagComponent {
       newBag.userDisplayName = this.user.displayName;
       newBag.userEmail = this.user.email;
       newBag.userPhotoUrl = this.user.photoURL;
-      newBag.createdAt = new Date();
+      newBag.createdAt = Timestamp.fromDate(new Date());
 
       this.bagService.addBag(newBag)
         .then(res => {

@@ -13,7 +13,11 @@ export class NavbarComponent {
   }
 
   async logout() {
-    await this.authService.logout();
-    await this.router.navigate(['/login']);
+    try {
+      await this.authService.logout();
+      await this.router.navigate(['/login']);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

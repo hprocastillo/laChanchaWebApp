@@ -1,14 +1,24 @@
-<div class="row">
-  <div class="col-12">
-    <ul class="list-group list-group-flush">
+<ng-container *ngIf="listExpenses.length > 0; else noResults">
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-group list-group-flush">
+        <li style="cursor: pointer" class="list-group-item border-0" *ngFor="let expense of listExpenses">
 
-      <li style="cursor: pointer" class="list-group-item border-0" *ngFor="let expense of listExpenses"
-          (click)="getSelectedExpense(expense)">
+          <app-list-expenses-item
+            [expense]="expense"
+            [user]="user"
+            [bag]="bag"
+          ></app-list-expenses-item>
 
-        <app-list-expenses-item [expense]="expense"></app-list-expenses-item>
-
-      </li>
-
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</ng-container>
+
+
+<ng-template #noResults>
+  <ngb-alert [dismissible]="false">
+    No tienes gastos aún. <strong> Agrega uno!</strong>
+  </ngb-alert>
+</ng-template>

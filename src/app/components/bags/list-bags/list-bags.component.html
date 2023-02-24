@@ -1,11 +1,23 @@
-<div class="row">
-  <div class="col-12">
-    <ul class="list-group list-group-flush">
+<ng-container *ngIf="listBags.length > 0; else noResults">
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-group list-group-flush">
+        <li style="cursor: pointer" class="list-group-item" *ngFor="let bag of listBags" (click)="getSelectedBag(bag)">
 
-      <li style="cursor: pointer" class="list-group-item" *ngFor="let bag of listBags" (click)="getSelectedBag(bag)">
-        <app-list-bags-item [bag]="bag"></app-list-bags-item>
-      </li>
+          <app-list-bags-item [bag]="bag"></app-list-bags-item>
 
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</ng-container>
+
+
+<ng-template #noResults>
+  <ngb-alert [dismissible]="false">
+    No tienes chanchas aún. <strong> Agrega una!</strong>
+  </ngb-alert>
+</ng-template>
+
+
+

@@ -1,3 +1,5 @@
+import {Timestamp} from "firebase/firestore";
+
 export interface Bag {
   id?: string;
   description: string;
@@ -8,6 +10,6 @@ export interface Bag {
   userDisplayName: string | null;
   userEmail: string | null;
   userPhotoUrl: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }

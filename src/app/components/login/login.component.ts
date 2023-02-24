@@ -12,7 +12,12 @@ export class LoginComponent {
   }
 
   async loginGoogle() {
-    await this.authService.loginGoogle();
-    await this.router.navigate(['/dashboard']);
+    try {
+      await this.authService.loginGoogle();
+      await this.router.navigate(['dashboard']);
+    } catch (e) {
+      console.log(e);
+    }
   }
+
 }

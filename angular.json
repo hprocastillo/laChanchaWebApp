@@ -74,7 +74,7 @@
               "browserTarget": "laChanchaWepApp:build:production"
             },
             "development": {
-              "browserTarget": "laChanchaWepApp:build:development"
+              "browserTarget": "laChanchaWepApp:build:development",
             }
           },
           "defaultConfiguration": "development"

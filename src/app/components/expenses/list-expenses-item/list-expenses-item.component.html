@@ -20,6 +20,7 @@
   <div class="row">
     <div class="col-11 offset-1">
       <app-button
+        (click)="openModalDelete(modalDelete)"
         [type]="'button'"
         [class]="'btn btn-danger me-2'"
         [icon]="'bi bi-trash-fill'"
@@ -36,6 +37,8 @@
 </ng-container>
 
 
+<!---------------------------------------->
+<!------------ MODAL RECEIPT ------------->
 <ng-template #modalReceipt let-modal>
   <div class="modal-header">
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -43,5 +46,33 @@
   <div class="modal-body text-center">
     <img *ngIf="expense.receiptUrl" style="max-width: 300px" [src]="[expense.receiptUrl]" alt="">
     <p *ngIf="!expense.receiptUrl">No hay recibo adjunto.</p>
+  </div>
+</ng-template>
+
+
+<!--------------------------------------->
+<!------------ MODAL DELETE ------------->
+<ng-template #modalDelete let-modal>
+  <div class="modal-body">
+    <p class="lead">¿Desea borrar {{expense.description}} ?</p>
+  </div>
+  <div class="modal-footer d-flex justify-content-center">
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="modal.dismiss()"
+      [type]="'button'"
+      [class]="'btn btn-secondary me-2'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Cancelar'"
+    ></app-button>
+
+    <!-- BUTTON DELETE -->
+    <app-button
+      (click)="deleteExpense(expense, bag)"
+      [type]="'button'"
+      [class]="'btn btn-danger'"
+      [icon]="'bi bi-trash-fill me-1'"
+      [label]="'Borrar'"
+    ></app-button>
   </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Bag} from "../../../interfaces/bag";
 import {User} from "@angular/fire/auth";
 import {Expense} from "../../../interfaces/expense";
@@ -13,7 +13,6 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
   //INPUTS AND OUTPUTS
   @Input() bag = {} as Bag;
   @Input() user = {} as User;
-  @Output() selectedExpense = new EventEmitter<Expense>();
 
   //VARIABLES
   listExpenses: Expense[] = [];
@@ -28,12 +27,10 @@ export class ListExpensesComponent implements OnInit, OnDestroy {
     this.expenseService.getExpenses()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.listExpenses = res;
+        this.listExpenses = res.filter(item => {
+          return item.bagId === this.bag.id;
+        });
       });
-  }
-
-  getSelectedExpense(expense: Expense) {
-    this.selectedExpense.emit(expense);
   }
 
   ngOnDestroy(): void {

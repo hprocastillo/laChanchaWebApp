@@ -4,6 +4,7 @@
   <!----------- LIST BAGS ---------->
   <app-list-bags
     *ngIf="listBagsTemplate"
+    [user]="user"
     (selectedBag)="getSelectedBag($event)"
   ></app-list-bags>
 
@@ -15,7 +16,6 @@
     (btnBack)="showListBagsTemplate()"
   ></app-new-bag>
 
-
   <!--------------------------------->
   <!----------- VIEW BAG ------------>
   <app-view-bag
@@ -23,7 +23,6 @@
     [user]="user"
     [bag]="selectedBag"
   ></app-view-bag>
-
 
   <!------------------------------------>
   <!----------- NEW EXPENSE ------------>
@@ -35,17 +34,13 @@
     (btnBackToViewBag)="showViewBagTemplate()"
   ></app-new-expense>
 
-
   <!-------------------------------->
   <!---------- BUTTON BAR ---------->
   <app-button-bar
     *ngIf="buttonBarTemplate"
-
     [listBagsTemplate]="listBagsTemplate"
     [listFriendsTemplate]="listFriendsTemplate"
     [viewBagTemplate]="viewBagTemplate"
-
-
     (btnFriends)="showListFriendsTemplate()"
     (btnNewBag)="showNewBagTemplate()"
     (btnNewExpense)="showNewExpenseTemplate()"

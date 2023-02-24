@@ -10,20 +10,13 @@ export class DashboardComponent {
   //VARIABLES
   selectedBag = {} as Bag;
 
-
   //TEMPLATES
   buttonBarTemplate: boolean = true;
-
   listBagsTemplate: boolean = true;
   newBagTemplate: boolean = false;
   viewBagTemplate: boolean = false;
-  listExpensesTemplate: boolean = false;
   newExpenseTemplate: boolean = false;
-  viewExpenseTemplate: boolean = false;
   listFriendsTemplate: boolean = false;
-  newFriendTemplate: boolean = false;
-  viewFriendTemplate: boolean = false;
-
 
   constructor(public authService: AuthService) {
   }
@@ -60,5 +53,4 @@ export class DashboardComponent {
     this.viewBagTemplate = false;
     this.newExpenseTemplate = true;
   }
-
 }

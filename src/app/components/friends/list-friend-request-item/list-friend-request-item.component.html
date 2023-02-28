@@ -1,0 +1,25 @@
+<div class="card shadow p-3 mb-2 bg-body-tertiary rounded">
+  <div class="d-flex justify-content-start mb-3">
+    <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer"
+         src="{{friendRequest.userPhotoUrl}}"
+         alt="">
+    <p class="mt-2 ms-2">{{friendRequest.userDisplayName}}</p>
+  </div>
+  <div class="d-flex justify-content-center">
+    <app-button
+      (click)="rejectRequest(friendRequest)"
+      [type]="'button'"
+      [class]="'btn btn-danger me-3'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Rechazar'"
+    ></app-button>
+
+    <app-button
+      (click)="agreeRequest(friendRequest)"
+      [type]="'button'"
+      [class]="'btn btn-success'"
+      [icon]="'bi bi-check-circle-fill'"
+      [label]="'Aceptar'"
+    ></app-button>
+  </div>
+</div>

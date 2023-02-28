@@ -1,3 +1,5 @@
+import {Timestamp} from "firebase/firestore";
+
 export interface Expense {
   id?: string;
   description: string;
@@ -10,6 +12,7 @@ export interface Expense {
   userDisplayName: string | null;
   userEmail: string | null;
   userPhotoUrl: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
 }

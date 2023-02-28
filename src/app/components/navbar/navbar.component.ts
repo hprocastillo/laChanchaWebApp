@@ -15,7 +15,7 @@ export class NavbarComponent {
   async logout() {
     try {
       await this.authService.logout();
-      await this.router.navigate(['/login']);
+      await this.router.navigate(['login']);
     } catch (e) {
       console.log(e);
     }

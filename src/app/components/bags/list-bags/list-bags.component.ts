@@ -23,12 +23,10 @@ export class ListBagsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.bagService.getBags()
+    this.bagService.getBagsByUser(this.user.uid)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.listBags = res.filter(item => {
-          return item.userId === this.user.uid;
-        });
+        this.listBags = res;
       });
   }
 

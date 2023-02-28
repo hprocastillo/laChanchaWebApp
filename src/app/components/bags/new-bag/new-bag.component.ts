@@ -10,11 +10,13 @@ import {Timestamp} from "firebase/firestore";
   templateUrl: './new-bag.component.html'
 })
 export class NewBagComponent {
-
+//INPUTS AND OUTPUTS
   @Input() user = {} as User;
   @Output() btnBack = new EventEmitter<boolean>();
 
+  //VARIABLES
   newBagForm: FormGroup;
+  loadingEffect: boolean = false;
 
   constructor(private fb: FormBuilder, private bagService: BagService) {
     this.newBagForm = this.fb.group({
@@ -28,6 +30,7 @@ export class NewBagComponent {
   }
 
   onSubmit() {
+    this.loadingEffect = true;
     let newBag: Bag;
     if (this.newBagForm.valid) {
 

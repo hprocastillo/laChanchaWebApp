@@ -10,6 +10,15 @@ export interface Bag {
   userDisplayName: string | null;
   userEmail: string | null;
   userPhotoUrl: string | null;
+
+  share: boolean;
+  guests: [{
+    guestId: string;
+    guestDisplayName: string;
+    guestEmail: string;
+    guestPhotoUrl: string;
+  }]
+
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }

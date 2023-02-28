@@ -1,0 +1,42 @@
+<!----------------------------------------->
+<!--------------- NEW USER ---------------->
+<div class="d-flex justify-content-start" (click)="openModalRequest(modalRequest)">
+  <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
+       alt="">
+  <p class="mt-2">{{users.displayName}}</p>
+</div>
+
+
+<!------------------------------------------------>
+<!------------ MODAL SENDING REQUEST ------------->
+<ng-template #modalRequest let-modal>
+  <div class="modal-body">
+    <p class="lead">Solicitud de amistad.</p>
+
+    <div class="d-flex justify-content-start">
+      <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
+           alt="">
+      <p class="mt-2">{{users.displayName}}</p>
+    </div>
+  </div>
+
+  <div class="modal-footer d-flex justify-content-center">
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="modal.dismiss()"
+      [type]="'button'"
+      [class]="'btn btn-danger me-2'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'No'"
+    ></app-button>
+
+    <!-- BUTTON DELETE -->
+    <app-button
+      (click)="sendingRequest(user, users)"
+      [type]="'button'"
+      [class]="'btn btn-primary'"
+      [icon]="'bi bi-envelope-fill me-1'"
+      [label]="'Enviar'"
+    ></app-button>
+  </div>
+</ng-template>

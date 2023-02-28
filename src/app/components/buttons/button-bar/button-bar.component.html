@@ -1,17 +1,14 @@
-<!---------------------------------------->
-<!---------------- BAGS ------------------>
+<!--------------------------------------------->
+<!---------------- LIST BAGS ------------------>
 <ng-container *ngIf="listBagsTemplate">
   <div class="row fixed-bottom bg-dark p-3">
     <div class="col-12 d-flex justify-content-between">
 
-      <!-- BUTTON FRIENDS -->
-      <app-button
+      <!-- BUTTON LIST FRIENDS -->
+      <app-button-friends-badge
         (click)="goFriends()"
-        [type]="'button'"
-        [class]="'btn btn-warning'"
-        [icon]="'bi bi-people-fill me-1'"
-        [label]="'Amigos'"
-      ></app-button>
+        [user]="user"
+      ></app-button-friends-badge>
 
       <!-- BUTTON NEW BAG -->
       <app-button
@@ -25,7 +22,6 @@
     </div>
   </div>
 </ng-container>
-
 
 
 <!-------------------------------------------->
@@ -57,13 +53,11 @@
 </ng-container>
 
 
-
-
-<!------------------------------------------->
-<!---------------- FRIENDS ------------------>
-<ng-container *ngIf="listFriendsTemplate">
+<!------------------------------------------------>
+<!---------------- LIST FRIENDS ------------------>
+<ng-container *ngIf="friendsTemplate">
   <div class="row fixed-bottom bg-dark p-3">
-    <div class="col-12 d-flex justify-content-between">
+    <div class="col-12">
 
       <!-- BUTTON BACK -->
       <app-button
@@ -72,15 +66,6 @@
         [class]="'btn btn-secondary'"
         [icon]="'bi bi-backspace-fill me-1'"
         [label]="'Atrás'"
-      ></app-button>
-
-      <!-- BUTTON NEW FRIEND -->
-      <app-button
-        (click)="goNewFriend()"
-        [type]="'button'"
-        [class]="'btn btn-primary'"
-        [icon]="'bi bi-person-fill-add me-1'"
-        [label]="'Agregar amigo'"
       ></app-button>
 
     </div>

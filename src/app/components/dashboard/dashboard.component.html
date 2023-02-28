@@ -8,6 +8,7 @@
     (selectedBag)="getSelectedBag($event)"
   ></app-list-bags>
 
+
   <!-------------------------------->
   <!----------- NEW BAG ------------>
   <app-new-bag
@@ -15,6 +16,7 @@
     [user]="user"
     (btnBack)="showListBagsTemplate()"
   ></app-new-bag>
+
 
   <!--------------------------------->
   <!----------- VIEW BAG ------------>
@@ -24,27 +26,51 @@
     [bag]="selectedBag"
   ></app-view-bag>
 
+
   <!------------------------------------>
   <!----------- NEW EXPENSE ------------>
   <app-new-expense
     *ngIf="newExpenseTemplate"
     [user]="user"
     [bag]="selectedBag"
-
     (btnBackToViewBag)="showViewBagTemplate()"
   ></app-new-expense>
+
+
+  <!----------------------------------------->
+  <!----------- FRIENDS TEMPLATE ------------>
+  <app-friends
+    *ngIf="friendsTemplate"
+    [user]="user"
+    (btnListFriendRequests)="showListFriendsRequest()"
+    (selectedFriend)="getSelectedFriend($event)"
+  ></app-friends>
+
+
+  <!------------------------------------------->
+  <!--------- LIST FRIENDS REQUEST ------------>
+  <app-list-friend-request
+    *ngIf="listFriendsRequestTemplate"
+    [user]="user"
+    (btnBack)="showFriendsTemplate()"
+  ></app-list-friend-request>
+
 
   <!-------------------------------->
   <!---------- BUTTON BAR ---------->
   <app-button-bar
     *ngIf="buttonBarTemplate"
-    [listBagsTemplate]="listBagsTemplate"
-    [listFriendsTemplate]="listFriendsTemplate"
-    [viewBagTemplate]="viewBagTemplate"
-    (btnFriends)="showListFriendsTemplate()"
+    [user]="user"
+
     (btnNewBag)="showNewBagTemplate()"
-    (btnNewExpense)="showNewExpenseTemplate()"
+    [listBagsTemplate]="listBagsTemplate"
+    [viewBagTemplate]="viewBagTemplate"
     (btnBackToListBags)="showListBagsTemplate()"
+
+    [friendsTemplate]="friendsTemplate"
+    (btnFriends)="showFriendsTemplate()"
+
+    (btnNewExpense)="showNewExpenseTemplate()"
   ></app-button-bar>
 
 </ng-container>

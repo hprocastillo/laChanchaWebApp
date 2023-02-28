@@ -23,11 +23,11 @@
     <input
       type="number"
       class="form-control"
-      id="amountTXT"
+      id="targetAmountTXT"
       placeholder="Monto objetivo S/."
       formControlName="targetAmount"
       required>
-    <label for="amountTXT">Monto objetivo S/.</label>
+    <label for="targetAmountTXT">Monto objetivo S/.</label>
   </div>
 
 
@@ -45,8 +45,16 @@
         [label]="'Cancelar'"
       ></app-button>
 
+      <!-- BUTTON SAVE LOADING -->
+      <app-button-save-loading
+        *ngIf="loadingEffect"
+        [type]="'button'"
+        [class]="'btn btn-success'"
+      ></app-button-save-loading>
+
       <!-- BUTTON SAVE -->
       <app-button
+        *ngIf="!loadingEffect"
         [type]="'submit'"
         [class]="'btn btn-success'"
         [icon]="'bi bi-hdd-fill me-1'"

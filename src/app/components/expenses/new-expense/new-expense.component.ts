@@ -6,6 +6,7 @@ import {ExpenseService} from "../../../services/expense.service";
 import {Expense} from "../../../interfaces/expense";
 import {getDownloadURL, ref, Storage, uploadBytes} from "@angular/fire/storage";
 import {BagService} from "../../../services/bag.service";
+import {Timestamp} from "firebase/firestore";
 
 @Component({
   selector: 'app-new-expense',
@@ -52,33 +53,38 @@ export class NewExpenseComponent {
     this.imagePreview = '';
   }
 
-  onSubmit() {
-    if (this.newExpenseForm.valid) {
-      this.loadingEffect = true;
-      let newExpense: Expense;
-      let newBag: Bag = this.bag;
-      const storageRef = ref(this.storage, `receipts/${this.file.name}`);
-      newExpense = this.newExpenseForm.value;
+  async onSubmit() {
+    this.loadingEffect = true;
+    let newExpense: Expense;
+    let newBag: Bag = this.bag;
 
-      uploadBytes(storageRef, this.file)
-        .then(async res => {
-          console.log(res);
-          newExpense.receiptUrl = await getDownloadURL(storageRef);
-          newExpense.bagId = this.bag.id;
-          newExpense.userId = this.user.uid;
-          newExpense.userDisplayName = this.user.displayName;
-          newExpense.userEmail = this.user.email;
-          newExpense.userPhotoUrl = this.user.photoURL;
-          newExpense.createdAt = new Date();
-          await this.expenseService.addExpense(newExpense);
-          // update collected amount at bag
-          newBag.collectedAmount = newBag.collectedAmount + newExpense.amount;
-          await this.bagService.updateBag(newBag);
-          // reset form and go out
-          this.newExpenseForm.reset();
-          this.goBack();
-        })
-        .catch(error => console.log(error));
+    if (this.newExpenseForm.valid) {
+      newExpense = this.newExpenseForm.value;
+      newExpense.bagId = this.bag.id;
+      newExpense.userId = this.user.uid;
+      newExpense.userDisplayName = this.user.displayName;
+      newExpense.userEmail = this.user.email;
+      newExpense.userPhotoUrl = this.user.photoURL;
+      newExpense.createdAt = Timestamp.fromDate(new Date());
+
+      if (this.file) {
+        const storageRef = ref(this.storage, `receipts/${this.file.name}`);
+        uploadBytes(storageRef, this.file)
+          .then(async res => {
+            console.log(res);
+            newExpense.receiptUrl = await getDownloadURL(storageRef);
+            await this.expenseService.addExpense(newExpense);
+          })
+          .catch(error => console.log(error));
+
+      } else {
+        await this.expenseService.addExpense(newExpense);
+      }
+
+      newBag.collectedAmount = newBag.collectedAmount + newExpense.amount;
+      await this.bagService.updateBag(newBag);
+      this.newExpenseForm.reset();
+      this.goBack();
     }
   }
 }

@@ -1,18 +1,19 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {User} from "@angular/fire/auth";
+import {Friend, FriendRequest} from "../../../interfaces/friend";
 import {FriendService} from "../../../services/friend.service";
-import {Friend} from "../../../interfaces/friend";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-list-friends',
-  templateUrl: './list-friends.component.html'
+  selector: 'app-friends',
+  templateUrl: './friends.component.html'
 })
-export class ListFriendsComponent implements OnInit, OnDestroy {
+export class FriendsComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
+  @Output() btnListFriendRequests = new EventEmitter<boolean>();
   @Output() selectedFriend = new EventEmitter<Friend>();
 
-  listFriends: Friend[] = [];
+  listFriendsRequest: FriendRequest[] = [];
 
   constructor(private friendService: FriendService) {
   }
@@ -20,15 +21,19 @@ export class ListFriendsComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<boolean>();
 
   ngOnInit(): void {
-    this.friendService.getFriendByUser(this.user.uid)
+    this.friendService.getActiveFriendRequestByGuest(this.user.uid)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {
-        this.listFriends = res;
+        this.listFriendsRequest = res;
       });
   }
 
   getSelectedFriend(friend: Friend) {
     this.selectedFriend.emit(friend);
+  }
+
+  goListFriendRequests() {
+    this.btnListFriendRequests.emit(true);
   }
 
   ngOnDestroy(): void {

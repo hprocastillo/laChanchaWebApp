@@ -7,7 +7,7 @@
 
   <!-- DESCRIPTION -->
   <div class="col-7 text-start">
-    <p class="fw-bold">{{expense.description}}</p>
+    <p>{{expense.description}}</p>
   </div>
 
   <!-- AMOUNT -->
@@ -17,6 +17,18 @@
 </div>
 
 <ng-container *ngIf="toolbar">
+  <div class="row mb-3">
+    <div class="col-11 offset-1">
+      <p class="mb-0 small text-muted">
+        <i class="bi bi-person-circle me-1"></i>
+        {{expense.userDisplayName}}
+      </p>
+      <p class="mb-0 small text-muted">
+        <i class="bi bi-calendar2-week me-1"></i>
+        {{expense.createdAt.toDate() | date:'MMM d, y'}}
+      </p>
+    </div>
+  </div>
   <div class="row">
     <div class="col-11 offset-1">
       <app-button

@@ -14,8 +14,6 @@ import {ViewBagComponent} from './components/bags/view-bag/view-bag.component';
 import {ListExpensesComponent} from './components/expenses/list-expenses/list-expenses.component';
 import {NewExpenseComponent} from './components/expenses/new-expense/new-expense.component';
 import {ListFriendsComponent} from './components/friends/list-friends/list-friends.component';
-import {NewFriendComponent} from './components/friends/new-friend/new-friend.component';
-import {EditFriendComponent} from './components/friends/edit-friend/edit-friend.component';
 import {ViewFriendComponent} from './components/friends/view-friend/view-friend.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {ButtonBarComponent} from './components/buttons/button-bar/button-bar.component';
@@ -30,6 +28,16 @@ import {provideStorage, getStorage} from '@angular/fire/storage';
 import {ListExpensesItemComponent} from './components/expenses/list-expenses-item/list-expenses-item.component';
 import {ExpenseReceiptComponent} from './components/expenses/expense-receipt/expense-receipt.component';
 import {ButtonSaveLoadingComponent} from './components/buttons/button-save-loading/button-save-loading.component';
+import {ListFriendsItemComponent} from './components/friends/list-friends-item/list-friends-item.component';
+import {FilterUsersPipe} from './pipes/filter-users.pipe';
+import {ButtonFriendsBadgeComponent} from './components/buttons/button-friends-badge/button-friends-badge.component';
+import {ListFriendRequestComponent} from './components/friends/list-friend-request/list-friend-request.component';
+import {
+  ListFriendRequestItemComponent
+} from './components/friends/list-friend-request-item/list-friend-request-item.component';
+import {SearchFriendComponent} from './components/friends/search-friend/search-friend.component';
+import {FriendsComponent} from './components/friends/friends/friends.component';
+import {SearchFriendItemComponent} from './components/friends/search-friend-item/search-friend-item.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +52,6 @@ import {ButtonSaveLoadingComponent} from './components/buttons/button-save-loadi
     ListExpensesComponent,
     NewExpenseComponent,
     ListFriendsComponent,
-    NewFriendComponent,
-    EditFriendComponent,
     ViewFriendComponent,
     PageNotFoundComponent,
     ButtonBarComponent,
@@ -54,6 +60,14 @@ import {ButtonSaveLoadingComponent} from './components/buttons/button-save-loadi
     ListExpensesItemComponent,
     ExpenseReceiptComponent,
     ButtonSaveLoadingComponent,
+    ListFriendsItemComponent,
+    FilterUsersPipe,
+    ButtonFriendsBadgeComponent,
+    ListFriendRequestComponent,
+    ListFriendRequestItemComponent,
+    SearchFriendComponent,
+    FriendsComponent,
+    SearchFriendItemComponent,
   ],
   imports: [
     BrowserModule,

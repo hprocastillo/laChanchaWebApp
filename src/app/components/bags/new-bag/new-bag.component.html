@@ -1,11 +1,9 @@
+<app-title [title]="'Nueva Chancha'"></app-title>
+
+
 <form [formGroup]="newBagForm" (ngSubmit)="onSubmit()">
 
-  <!------------ TITLE -------------->
-  <div class="form-floating mb-3">
-    <p class="display-5 mb-3">Nueva Chancha</p>
-  </div>
-
-  <!------------ DESCRIPTION -------------->
+  <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
     <input
       type="text"
@@ -17,8 +15,7 @@
     <label for="descriptionTXT">Descripción</label>
   </div>
 
-
-  <!----------- TARGET AMOUNT ------------>
+  <!-- TARGET AMOUNT -->
   <div class="form-floating mb-2">
     <input
       type="number"
@@ -30,37 +27,33 @@
     <label for="targetAmountTXT">Monto objetivo S/.</label>
   </div>
 
+  <!-- BUTTONS FOOTERS -->
+  <div class="w-100 fixed-bottom bg-dark p-3 d-flex justify-content-between">
 
-  <!----------------------------------------->
-  <!---------------- BUTTONS ---------------->
-  <div class="row fixed-bottom bg-dark p-3">
-    <div class="col-12 d-flex justify-content-between">
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="goBack()"
+      [type]="'button'"
+      [class]="'btn btn-danger'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Cancelar'"
+    ></app-button>
 
-      <!-- BUTTON CANCEL -->
-      <app-button
-        (click)="goBack()"
-        [type]="'button'"
-        [class]="'btn btn-danger'"
-        [icon]="'bi bi-x-circle-fill me-1'"
-        [label]="'Cancelar'"
-      ></app-button>
+    <!-- BUTTON SAVE - LOADING EFFECT -->
+    <app-button-save-loading
+      *ngIf="loadingEffect"
+      [type]="'button'"
+      [class]="'btn btn-success'"
+    ></app-button-save-loading>
 
-      <!-- BUTTON SAVE LOADING -->
-      <app-button-save-loading
-        *ngIf="loadingEffect"
-        [type]="'button'"
-        [class]="'btn btn-success'"
-      ></app-button-save-loading>
+    <!-- BUTTON SAVE -->
+    <app-button
+      *ngIf="!loadingEffect"
+      [type]="'submit'"
+      [class]="'btn btn-success'"
+      [icon]="'bi bi-hdd-fill me-1'"
+      [label]="'Guardar'"
+    ></app-button>
 
-      <!-- BUTTON SAVE -->
-      <app-button
-        *ngIf="!loadingEffect"
-        [type]="'submit'"
-        [class]="'btn btn-success'"
-        [icon]="'bi bi-hdd-fill me-1'"
-        [label]="'Guardar'"
-      ></app-button>
-
-    </div>
   </div>
 </form>

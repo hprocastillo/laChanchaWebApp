@@ -1,36 +1,36 @@
 import {Timestamp} from "firebase/firestore";
 
 export interface Friend {
-  id?: string;
+  id: string;
 
   userId: string;
-  userDisplayName: string | null;
-  userEmail: string | null;
-  userPhotoUrl: string | null;
+  userDisplayName: string;
+  userEmail: string;
+  userPhotoUrl: string;
 
   guestId: string;
-  guestDisplayName: string | null;
-  guestEmail: string | null;
-  guestPhotoUrl: string | null;
+  guestDisplayName: string;
+  guestEmail: string;
+  guestPhotoUrl: string;
 
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
 
 export interface FriendRequest {
-  id?: string;
+  id: string;
   active: boolean;// "T" = waiting answer // "F" = answered
   response: boolean;// "T" = positive // "F" = negative
 
   userId: string;
-  userDisplayName: string | null;
-  userEmail: string | null;
-  userPhotoUrl: string | null;
+  userDisplayName: string;
+  userEmail: string;
+  userPhotoUrl: string;
 
   guestId: string;
-  guestDisplayName: string | null;
-  guestEmail: string | null;
-  guestPhotoUrl: string | null;
+  guestDisplayName: string;
+  guestEmail: string;
+  guestPhotoUrl: string;
 
   createdAt: Timestamp;
   updatedAt: Timestamp;

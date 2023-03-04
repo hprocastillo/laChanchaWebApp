@@ -1,32 +1,19 @@
-<ng-container *ngIf="listFriendsRequests.length > 0">
-  <div class="row">
-    <div class="col-12">
-      <p class="lead fw-bold">Solicitudes de amistad</p>
+<app-title [title]="'Solicitudes de Amisstad'"></app-title>
 
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item border-0" *ngFor="let friendRequest of listFriendsRequests">
 
-          <app-list-friend-request-item
-            [friendRequest]="friendRequest"
-          ></app-list-friend-request-item>
+<ng-container *ngIf="listFriendsRequests.length > 0; else noResults">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item p-1 border-0" *ngFor="let friendRequest of listFriendsRequests">
 
-        </li>
-      </ul>
+      <app-list-friend-request-item [friendRequest]="friendRequest"></app-list-friend-request-item>
 
-    </div>
-  </div>
+    </li>
+  </ul>
 </ng-container>
 
 
-<div class="row fixed-bottom bg-dark p-3">
-  <div class="col-12 d-flex justify-content-between">
-    <!-- BUTTON BACK -->
-    <app-button
-      (click)="goBack()"
-      [type]="'button'"
-      [class]="'btn btn-secondary'"
-      [icon]="'bi bi-backspace-fill me-1'"
-      [label]="'Atrás'"
-    ></app-button>
-  </div>
-</div>
+<ng-template #noResults>
+  <ngb-alert [dismissible]="false" [type]="'success'">
+    No hay solicitudes de amistad.
+  </ngb-alert>
+</ng-template>

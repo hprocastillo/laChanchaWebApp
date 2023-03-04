@@ -13,20 +13,31 @@ import {Timestamp} from "firebase/firestore";
 export class SearchFriendItemComponent {
   @Input() users = {} as Users;
   @Input() user = {} as User;
-  constructor(private friendService: FriendService, private modalService: NgbModal) {
+
+  constructor(
+    private friendService: FriendService,
+    private modalService: NgbModal) {
   }
+
   openModalRequest(modalRequest: any) {
     this.modalService.open(modalRequest, {backdrop: 'static', centered: true});
   }
+
   async sendingRequest(user: User, users: Users) {
     let friendRequest = {} as FriendRequest;
 
     friendRequest.active = true;
     friendRequest.response = false;
     friendRequest.userId = user.uid;
-    friendRequest.userDisplayName = user.displayName;
-    friendRequest.userEmail = user.email;
-    friendRequest.userPhotoUrl = user.photoURL;
+    if (typeof user.displayName === "string") {
+      friendRequest.userDisplayName = user.displayName;
+    }
+    if (typeof user.email === "string") {
+      friendRequest.userEmail = user.email;
+    }
+    if (typeof user.photoURL === "string") {
+      friendRequest.userPhotoUrl = user.photoURL;
+    }
     friendRequest.guestId = users.uid;
     friendRequest.guestDisplayName = users.displayName;
     friendRequest.guestEmail = users.email;

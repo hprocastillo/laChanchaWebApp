@@ -1,10 +1,9 @@
-<!--------------------------------------------->
-<!---------------- LIST BAGS ------------------>
-<ng-container *ngIf="listBagsTemplate">
+<!-- BAGS TEMPLATE -->
+<ng-container *ngIf="bagsTemplate">
   <div class="row fixed-bottom bg-dark p-3">
     <div class="col-12 d-flex justify-content-between">
 
-      <!-- BUTTON LIST FRIENDS -->
+      <!-- BUTTON FRIENDS -->
       <app-button-friends-badge
         (click)="goFriends()"
         [user]="user"
@@ -24,15 +23,14 @@
 </ng-container>
 
 
-<!-------------------------------------------->
-<!---------------- VIEW BAG ------------------>
+<!-- VIEW BAG TEMPLATE -->
 <ng-container *ngIf="viewBagTemplate">
   <div class="row fixed-bottom bg-dark p-3">
     <div class="col-12 d-flex justify-content-between">
 
       <!-- BUTTON BACK -->
       <app-button
-        (click)="goBackToListBagsTemplate()"
+        (click)="goBags()"
         [type]="'button'"
         [class]="'btn btn-secondary'"
         [icon]="'bi bi-backspace-fill me-1'"
@@ -53,15 +51,94 @@
 </ng-container>
 
 
-<!------------------------------------------------>
-<!---------------- LIST FRIENDS ------------------>
+<!-- SHARE BAG TEMPLATE -->
+<ng-container *ngIf="shareBagTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12">
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goViewBag()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+    </div>
+  </div>
+</ng-container>
+
+<!-- SHARE BAG REQUEST TEMPLATE -->
+<ng-container *ngIf="shareBagRequestTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12">
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goBags()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+    </div>
+  </div>
+</ng-container>
+
+
+<!-- FRIENDS TEMPLATE -->
 <ng-container *ngIf="friendsTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goBags()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+
+      <!-- BUTTON SEARCH FRIEND -->
+      <app-button
+        (click)="goSearchFriend()"
+        [type]="'button'"
+        [class]="'btn btn-primary'"
+        [icon]="'bi bi-person-plus-fill me-1'"
+        [label]="'Agregar amigo'"
+      ></app-button>
+
+    </div>
+  </div>
+</ng-container>
+
+
+<!-- FRIENDS REQUEST TEMPLATE -->
+<ng-container *ngIf="friendsRequestTemplate">
   <div class="row fixed-bottom bg-dark p-3">
     <div class="col-12">
 
       <!-- BUTTON BACK -->
       <app-button
-        (click)="goBackToListBagsTemplate()"
+        (click)="goFriends()"
+        [type]="'button'"
+        [class]="'btn btn-secondary'"
+        [icon]="'bi bi-backspace-fill me-1'"
+        [label]="'Atrás'"
+      ></app-button>
+
+    </div>
+  </div>
+</ng-container>
+
+
+<!-- SEARCH FRIENDS TEMPLATE -->
+<ng-container *ngIf="searchFriendTemplate">
+  <div class="row fixed-bottom bg-dark p-3">
+    <div class="col-12">
+
+      <!-- BUTTON BACK -->
+      <app-button
+        (click)="goFriends()"
         [type]="'button'"
         [class]="'btn btn-secondary'"
         [icon]="'bi bi-backspace-fill me-1'"

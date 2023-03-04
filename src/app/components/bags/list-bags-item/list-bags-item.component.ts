@@ -7,7 +7,5 @@ import {Bag} from "../../../interfaces/bag";
   templateUrl: './list-bags-item.component.html'
 })
 export class ListBagsItemComponent {
-
   @Input() bag = {} as Bag;
-
 }

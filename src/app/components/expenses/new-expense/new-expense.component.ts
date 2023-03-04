@@ -14,12 +14,10 @@ import {Timestamp} from "firebase/firestore";
   styleUrls: ['./new-expense.component..scss']
 })
 export class NewExpenseComponent {
-  //INPUTS AND OUTPUTS
   @Input() user = {} as User;
   @Input() bag = {} as Bag;
   @Output() btnBackToViewBag = new EventEmitter<boolean>();
 
-  //VARIABLES
   loadingEffect: boolean = false;
   newExpenseForm: FormGroup;
   imagePreview: string | undefined;
@@ -62,9 +60,15 @@ export class NewExpenseComponent {
       newExpense = this.newExpenseForm.value;
       newExpense.bagId = this.bag.id;
       newExpense.userId = this.user.uid;
-      newExpense.userDisplayName = this.user.displayName;
-      newExpense.userEmail = this.user.email;
-      newExpense.userPhotoUrl = this.user.photoURL;
+      if (this.user.displayName != null) {
+        newExpense.userDisplayName = this.user.displayName;
+      }
+      if (this.user.email != null) {
+        newExpense.userEmail = this.user.email;
+      }
+      if (this.user.photoURL != null) {
+        newExpense.userPhotoUrl = this.user.photoURL;
+      }
       newExpense.createdAt = Timestamp.fromDate(new Date());
 
       if (this.file) {

@@ -10,7 +10,7 @@ import {
   updateDoc,
   where
 } from "@angular/fire/firestore";
-import {Bag} from "../interfaces/bag";
+import {Bag, ShareBagRequest} from "../interfaces/bag";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -47,4 +47,28 @@ export class BagService {
     const ref = doc(this.firestore, `bags/${bag.id}`);
     return updateDoc(ref, {...bag});
   }
+
+  /////////////////////////////////////////////////
+  //////////////// BAG REQUESTS ///////////////////
+  /////////////////////////////////////////////////
+  addShareBagRequest(shareBagRequest: ShareBagRequest) {
+    const ref = collection(this.firestore, 'shareBagRequests');
+    return addDoc(ref, shareBagRequest);
+  }
+
+  getActiveShareBagRequestByGuest(guestId: string): Observable<ShareBagRequest[]> {
+    const ref = collection(this.firestore, 'shareBagRequests');
+    const q = query(ref,
+      where("guestId", "==", guestId),
+      where("active", "==", true),
+      where("response", "==", false));
+    return collectionData(q, {idField: 'id'}) as Observable<ShareBagRequest[]>;
+  }
+
+  updateShareBagRequest(shareBagRequest: ShareBagRequest) {
+    const ref = doc(this.firestore, `shareBagRequests/${shareBagRequest.id}`);
+    return updateDoc(ref, {...shareBagRequest});
+  }
+
+
 }

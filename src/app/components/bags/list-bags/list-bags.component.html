@@ -1,23 +1,20 @@
+<app-title [title]="'Mis Chanchas'"></app-title>
+
+
 <ng-container *ngIf="listBags.length > 0; else noResults">
-  <div class="row">
-    <div class="col-12">
-      <ul class="list-group list-group-flush">
-        <li style="cursor: pointer" class="list-group-item" *ngFor="let bag of listBags" (click)="getSelectedBag(bag)">
+  <ul class="list-group list-group-flush">
+    <li style="cursor: pointer" class="list-group-item p-1 border-0" *ngFor="let bag of listBags"
+        (click)="getSelectedBag(bag)">
 
-          <app-list-bags-item [bag]="bag"></app-list-bags-item>
+      <app-list-bags-item [bag]="bag"></app-list-bags-item>
 
-        </li>
-      </ul>
-    </div>
-  </div>
+    </li>
+  </ul>
 </ng-container>
 
 
 <ng-template #noResults>
-  <ngb-alert [dismissible]="false">
-    No tienes chanchas aún. <strong> Agrega una!</strong>
+  <ngb-alert [dismissible]="false" [type]="'success'">
+    No tienes chanchas aún.
   </ngb-alert>
 </ng-template>
-
-
-

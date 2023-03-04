@@ -10,27 +10,23 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './list-expenses.component.html'
 })
 export class ListExpensesComponent implements OnInit, OnDestroy {
-  //INPUTS AND OUTPUTS
   @Input() bag = {} as Bag;
   @Input() user = {} as User;
-
-  //VARIABLES
   listExpenses: Expense[] = [];
-
-  //UNSUBSCRIBE METHOD
-  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private expenseService: ExpenseService) {
   }
 
+  private unsubscribe$ = new Subject<boolean>();
+
   ngOnInit() {
-    this.expenseService.getExpenses()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(res => {
-        this.listExpenses = res.filter(item => {
-          return item.bagId === this.bag.id;
+    if (this.user.uid && this.bag.id) {
+      this.expenseService.getExpensesByBag(this.user.uid, this.bag.id)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
+          this.listExpenses = res;
         });
-      });
+    }
   }
 
   ngOnDestroy(): void {

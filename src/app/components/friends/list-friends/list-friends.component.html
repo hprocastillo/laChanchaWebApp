@@ -1,6 +1,9 @@
+<app-title [title]="'Mis Amigos'"></app-title>
+
+
 <ng-container *ngIf="listFriends.length > 0; else noResults">
   <ul class="list-group list-group-flush">
-    <li style="cursor: pointer;" class="list-group-item border-0" *ngFor="let friend of listFriends"
+    <li style="cursor: pointer" class="list-group-item p-1 border-0" *ngFor="let friend of listFriends"
         (click)="getSelectedFriend(friend)">
 
       <app-list-friends-item [friend]="friend"></app-list-friends-item>
@@ -11,7 +14,7 @@
 
 
 <ng-template #noResults>
-  <ngb-alert [dismissible]="true" [type]="'success'">
-    No tienes amigos aún. <strong>Agrega uno.</strong>
+  <ngb-alert [dismissible]="false" [type]="'success'">
+    No tienes amigos aún.
   </ngb-alert>
 </ng-template>

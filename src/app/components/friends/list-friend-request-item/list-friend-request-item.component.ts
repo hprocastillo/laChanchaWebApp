@@ -8,7 +8,6 @@ import {Timestamp} from "firebase/firestore";
   templateUrl: './list-friend-request-item.component.html'
 })
 export class ListFriendRequestItemComponent {
-  //INPUTS AND OUTPUTS
   @Input() friendRequest = {} as FriendRequest;
 
   constructor(private friendService: FriendService) {

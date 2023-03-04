@@ -9,20 +9,16 @@ import {User} from "@angular/fire/auth";
   templateUrl: './list-bags.component.html'
 })
 export class ListBagsComponent implements OnInit, OnDestroy {
-  //INPUTS AND OUTPUTS
   @Input() user = {} as User;
   @Output() selectedBag = new EventEmitter<Bag>();
-
-  //VARIABLES
   listBags: Bag[] = [];
-
-  //UNSUBSCRIBE METHOD
-  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private bagService: BagService) {
   }
 
-  ngOnInit() {
+  private unsubscribe$ = new Subject<boolean>();
+
+  ngOnInit(): void {
     this.bagService.getBagsByUser(this.user.uid)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(res => {

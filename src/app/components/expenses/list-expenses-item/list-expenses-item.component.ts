@@ -11,12 +11,9 @@ import {User} from "@angular/fire/auth";
   templateUrl: './list-expenses-item.component.html'
 })
 export class ListExpensesItemComponent {
-  //INPUTS AND OUTPUTS
   @Input() expense = {} as Expense;
   @Input() bag = {} as Bag;
   @Input() user = {} as User;
-  //VARIABLES
-  toolbar: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -24,16 +21,8 @@ export class ListExpensesItemComponent {
     private bagService: BagService) {
   }
 
-  openToolbar(value: boolean) {
-    this.toolbar = value;
-  }
-
-  openModalReceipt(modalReceipt: any) {
-    this.modalService.open(modalReceipt, {backdrop: 'static', centered: true});
-  }
-
-  openModalDelete(modalDelete: any) {
-    this.modalService.open(modalDelete, {backdrop: 'static', centered: true});
+  openModal(modal: any) {
+    this.modalService.open(modal, {backdrop: 'static', centered: true});
   }
 
   async deleteExpense(expense: Expense, bag: Bag) {
@@ -46,5 +35,4 @@ export class ListExpensesItemComponent {
       console.log(e);
     }
   }
-
 }

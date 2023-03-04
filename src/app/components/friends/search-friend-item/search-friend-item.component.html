@@ -1,17 +1,15 @@
-<!----------------------------------------->
-<!--------------- NEW USER ---------------->
-<div class="d-flex justify-content-start" (click)="openModalRequest(modalRequest)">
-  <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
-       alt="">
-  <p class="mt-2">{{users.displayName}}</p>
+<div class="shadow p-2 mb-2 bg-body-tertiary rounded border-0" (click)="openModalRequest(modalRequest)">
+  <div class="w-100 d-flex justify-content-start">
+    <img style="width: 48px" class="rounded-circle" referrerpolicy="no-referrer" src="{{users.photoURL}}" alt="">
+    <p class="m-auto ms-2">{{users.displayName | titlecase}}</p>
+  </div>
 </div>
 
 
-<!------------------------------------------------>
-<!------------ MODAL SENDING REQUEST ------------->
+<!-- MODAL REQUEST -->
 <ng-template #modalRequest let-modal>
   <div class="modal-body">
-    <p class="lead">Solicitud de amistad.</p>
+    <p class="lead fw-bold">Solicitud de amistad.</p>
 
     <div class="d-flex justify-content-start">
       <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
@@ -19,7 +17,6 @@
       <p class="mt-2">{{users.displayName}}</p>
     </div>
   </div>
-
   <div class="modal-footer d-flex justify-content-center">
     <!-- BUTTON CANCEL -->
     <app-button

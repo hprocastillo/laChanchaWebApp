@@ -11,7 +11,6 @@ import {Subject, takeUntil} from "rxjs";
 export class ListFriendsComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
   @Output() selectedFriend = new EventEmitter<Friend>();
-
   listFriends: Friend[] = [];
 
   constructor(private friendService: FriendService) {

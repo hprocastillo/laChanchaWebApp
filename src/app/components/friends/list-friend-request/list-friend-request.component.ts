@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {User} from "@angular/fire/auth";
 import {Subject, takeUntil} from "rxjs";
 import {FriendService} from "../../../services/friend.service";
@@ -9,18 +9,13 @@ import {FriendRequest} from "../../../interfaces/friend";
   templateUrl: './list-friend-request.component.html'
 })
 export class ListFriendRequestComponent implements OnInit, OnDestroy {
-  //INPUTS AND OUTPUTS
   @Input() user = {} as User;
-  @Output() btnBack = new EventEmitter<boolean>();
-
-  //VARIABLES
   listFriendsRequests: FriendRequest[] = [];
-
-  //UNSUBSCRIBE METHOD
-  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private friendService: FriendService) {
   }
+
+  private unsubscribe$ = new Subject<boolean>();
 
   ngOnInit() {
     this.friendService.getActiveFriendRequestByGuest(this.user.uid)
@@ -28,10 +23,6 @@ export class ListFriendRequestComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.listFriendsRequests = res;
       });
-  }
-
-  goBack() {
-    this.btnBack.emit(true);
   }
 
   ngOnDestroy(): void {

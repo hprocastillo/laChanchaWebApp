@@ -5,21 +5,18 @@ import {
   collectionData,
   deleteDoc,
   doc,
-  Firestore, orderBy,
-  query, updateDoc,
+  Firestore,
+  query,
+  updateDoc,
   where
 } from "@angular/fire/firestore";
 import {Friend, FriendRequest} from "../interfaces/friend";
 import {Observable} from "rxjs";
-import {User} from "@angular/fire/auth";
-import {Users} from "../interfaces/users";
-import {Bag} from "../interfaces/bag";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendService {
-
   constructor(private firestore: Firestore) {
   }
 
@@ -44,9 +41,7 @@ export class FriendService {
     return updateDoc(ref, {...friend});
   }
 
-  //////////////////////////////////////////////////////
-  ///////////////// FRIEND REQUESTS ////////////////////
-  //////////////////////////////////////////////////////
+  // FRIEND REQUESTS
   addFriendRequest(friendRequest: FriendRequest) {
     const ref = collection(this.firestore, 'friendRequests');
     return addDoc(ref, friendRequest);
@@ -65,6 +60,4 @@ export class FriendService {
     const ref = doc(this.firestore, `friendRequests/${friendRequest.id}`);
     return updateDoc(ref, {...friendRequest});
   }
-
-
 }

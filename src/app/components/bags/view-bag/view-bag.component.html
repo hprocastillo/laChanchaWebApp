@@ -1,8 +1,9 @@
-<!-------------------------------------------->
-<!---------------- EDIT MODE ----------------->
+<!--/////////////////////////////////////////////////-->
+<!--////////////////// EDIT MODE ////////////////////-->
+<!--/////////////////////////////////////////////////-->
 <ng-container *ngIf="editMode; else viewMode">
-  <div class="row">
-    <div class="col-10">
+  <div class="w-100 d-flex justify-content-between">
+    <div class="w-75">
       <div class="form-floating mb-3">
         <input
           type="text"
@@ -13,7 +14,7 @@
         <label for="descriptionTXT" class="form-label">Descripción</label>
       </div>
 
-      <div class="form-floating mb-3">
+      <div class="form-floating">
         <input
           type="number"
           class="form-control"
@@ -24,32 +25,95 @@
       </div>
     </div>
 
-    <div class="col-2">
-      <app-button
-        (click)="openModalEdit(modalEdit)"
-        [type]="'button'"
-        [class]="'btn btn-success mb-3'"
-        [icon]="'bi bi-hdd-fill'"
-      ></app-button>
+    <div class="w-25 text-end">
+      <!-- BUTTON SAVE -->
+      <div class="mb-2">
+        <app-button
+          (click)="openModalEdit(modalEdit)"
+          [type]="'button'"
+          [class]="'btn btn-success'"
+          [icon]="'bi bi-hdd-fill'"
+        ></app-button>
+      </div>
 
-      <app-button
-        (click)="getEdit(false)"
-        [type]="'button'"
-        [class]="'btn btn-danger'"
-        [icon]="'bi bi-x-circle-fill'"
-      ></app-button>
+      <!-- BUTTON CANCEL -->
+      <div class="mb-2">
+        <app-button
+          (click)="getEdit(false)"
+          [type]="'button'"
+          [class]="'btn btn-danger'"
+          [icon]="'bi bi-x-circle-fill'"
+        ></app-button>
+      </div>
     </div>
   </div>
-
   <hr class="text-muted">
 </ng-container>
 
-<!--------------------------------------->
-<!------------- MODAL EDIT -------------->
+<!--/////////////////////////////////////////////////-->
+<!--////////////////// VIEW MODE ////////////////////-->
+<!--/////////////////////////////////////////////////-->
+<ng-template #viewMode>
+  <div class="w-100 d-flex justify-content-between">
+    <!-- BAG DATA -->
+    <div class="w-75">
+      <p class="mb-3 lead fw-bold">{{bag.description}}</p>
+      <p class="mb-2">
+        <i class="bi bi-person-circle me-1"></i>
+        {{bag.userDisplayName | titlecase}}
+      </p>
+      <p class="mb-2">
+        <i class="bi bi-calendar2-week me-1"></i>
+        {{bag.createdAt.toDate() | date:'MMM d, y'}}
+      </p>
+      <p class="mb-2 fw-bold" [ngStyle]="{'color': bag.collectedAmount < bag.targetAmount ? 'green':'red'}">
+        Monto recolectado: S/. {{bag.collectedAmount}}
+      </p>
+      <p class="fw-bold">Monto objetivo: S/. {{bag.targetAmount}}</p>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="w-25 text-end">
+      <!-- EDIT -->
+      <div class="mb-2">
+        <app-button
+          (click)="getEdit(true)"
+          [type]="'button'"
+          [class]="'btn btn-primary'"
+          [icon]="'bi bi-pencil-square'"
+        ></app-button>
+      </div>
+      <!-- DELETE -->
+      <div class="mb-2">
+        <app-button
+          (click)="openModalDelete(modalDelete)"
+          [type]="'button'"
+          [class]="'btn btn-danger'"
+          [icon]="'bi bi-trash-fill'"
+        ></app-button>
+      </div>
+      <!-- SHARE -->
+      <div class="mb-2">
+        <app-button
+          (click)="goShareBag()"
+          [type]="'button'"
+          [class]="'btn btn-warning'"
+          [icon]="'bi bi-share-fill'"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+  <hr class="text-muted">
+
+</ng-template>
+
+
+<!-- MODAL CONFIRM EDIT -->
 <ng-template #modalEdit let-modal>
   <div class="modal-body text-center">
     <p class="lead">¿Desea guardar los cambios?</p>
 
+    <!-- BUTTON CANCEL -->
     <app-button
       (click)="modal.dismiss('Cross click')"
       [type]="'button'"
@@ -58,6 +122,7 @@
       [label]="'Cancelar'"
     ></app-button>
 
+    <!-- BUTTON SAVE -->
     <app-button
       (click)="onSave(bag)"
       [type]="'button'"
@@ -69,53 +134,35 @@
 </ng-template>
 
 
-<!-------------------------------------->
-<!------------- VIEW MODE -------------->
-<ng-template #viewMode>
-  <div class="row mb-3">
-    <div class="col-10">
-      <p class="display-6">{{bag.description}}</p>
-      <p class="mb-1 text-muted">
-        <i class="bi bi-person-circle me-1"></i>
-        {{bag.userDisplayName}}
-      </p>
-      <p class="text-muted">
-        <i class="bi bi-calendar2-week me-1"></i>
-        {{bag.createdAt.toDate() | date:'MMM d, y'}}
-      </p>
-    </div>
-    <div class="col-2">
-      <app-button
-        (click)="getEdit(true)"
-        [type]="'button'"
-        [class]="'btn btn-primary mb-3'"
-        [icon]="'bi bi-pencil-square'"
-      ></app-button>
+<!-- MODAL DELETE -->
+<ng-template #modalDelete let-modal>
+  <div class="modal-body text-center">
+    <p class="lead">¿Desea eliminar la chancha?</p>
 
-      <app-button
-        [type]="'button'"
-        [class]="'btn btn-warning'"
-        [icon]="'bi bi-share-fill'"
-      ></app-button>
-    </div>
+    <ngb-alert *ngIf="msgError" [dismissible]="false" [type]="'danger'">
+      <strong>Atencion! </strong>{{msgError}}
+    </ngb-alert>
+
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="modal.dismiss('Cross click')"
+      [type]="'button'"
+      [class]="'btn btn-secondary me-2'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Cancelar'"
+    ></app-button>
+
+    <!-- BUTTON DELETE -->
+    <app-button
+      (click)="onDelete(bag)"
+      [type]="'button'"
+      [class]="'btn btn-danger'"
+      [icon]="'bi bi-trash-fill me-1'"
+      [label]="'Borrar'"
+    ></app-button>
   </div>
-
-  <div class="row">
-    <div class="col-12 text-end">
-      <p class="mb-1" [ngStyle]="{'color': bag.collectedAmount < bag.targetAmount ? 'red':'green'}">
-        Monto recolectado: &nbsp; <span class="lead fw-bold"> S/. {{bag.collectedAmount}}</span></p>
-      <p class="mb-1">Monto objetivo: &nbsp; <span class="lead fw-bold"> S/. {{bag.targetAmount}}</span></p>
-    </div>
-  </div>
-
-  <hr class="text-muted">
-
 </ng-template>
 
 
-<!------------------------------------------>
-<!------------- LIST EXPENSES -------------->
-<app-list-expenses
-  [bag]="bag"
-  [user]="user"
-></app-list-expenses>
+<!-- LIST EXPENSES -->
+<app-list-expenses [bag]="bag" [user]="user"></app-list-expenses>

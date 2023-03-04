@@ -1,33 +1,11 @@
-<!------------------------------------------------------------------->
-<!------------ ALERT SHOW NOTIFICATIONS FRIEND REQUESTS ------------->
-<ng-container *ngIf="listFriendsRequest.length > 0">
-  <ngb-alert [dismissible]="true" [type]="'warning'">
-    <p style="cursor:pointer" class="m-0" (click)="goListFriendRequests()">
-      Tienes <strong>{{listFriendsRequest.length}}</strong> solicitudes de amistad pendientes.
-    </p>
-  </ngb-alert>
-</ng-container>
+<!-- SHOW NOTIFICATIONS -->
+<app-notifications-friends
+  [user]="user"
+  (btnFriendRequest)="goFriendRequest()"
+></app-notifications-friends>
 
-
-<!--------------------------------------------------------->
-<!-------------------- LIST FRIENDS ----------------------->
-<div class="row">
-  <div class="col-12">
-    <p class="lead fw-bold">Mis amigos</p>
-
-
-    <!--------------------------------------------------->
-    <!----------------- SEARCH FRIENDS ------------------>
-    <app-search-friend [user]="user"></app-search-friend>
-
-
-    <!--------------------------------------------------->
-    <!----------------- LIST FRIENDS -------------------->
-    <app-list-friends
-      [user]="user"
-      (selectedFriend)="getSelectedFriend($event)"
-    ></app-list-friends>
-
-
-  </div>
-</div>
+<!-- LIST FRIENDS -->
+<app-list-friends
+  [user]="user"
+  (selectedFriend)="getSelectedFriend($event)"
+></app-list-friends>

@@ -1,0 +1,82 @@
+<app-title [title]="'Compartir chancha con amigos'"></app-title>
+
+
+<div class="w-100">
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="searchTEXT"
+      [(ngModel)]="searchText"
+      placeholder="Buscar amigo por nombre o correo electrónico"
+      autofocus>
+    <label for="searchTEXT">Buscar amigo por nombre o correo electrónico</label>
+  </div>
+</div>
+
+
+<ng-container *ngIf="searchText">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item p-1 border-0" *ngFor="let friend of listFriends | filterFriends:searchText">
+
+      <div class="shadow p-2 mb-2 bg-body-tertiary rounded border-0">
+        <div class="w-100 d-flex justify-content-between">
+          <div class="w-75 d-flex justify-content-start">
+            <img style="width: 48px" class="rounded-circle" referrerpolicy="no-referrer"
+                 src="{{friend.guestPhotoUrl}}" alt="">
+            <p class="m-auto ms-2">{{friend.guestDisplayName | titlecase}}</p>
+          </div>
+          <div class="w-25 text-end">
+            <app-button
+              (click)="openModalRequest(modalRequest)"
+              [type]="'button'"
+              [class]="'btn btn-warning mt-1'"
+              [icon]="'bi bi-share-fill'"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL REQUEST -->
+      <ng-template #modalRequest let-modal>
+        <div class="modal-body">
+          <p class="lead fw-bold">Compartir Chancha con.</p>
+
+          <div class="d-flex justify-content-start">
+            <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer"
+                 src="{{friend.guestPhotoUrl}}"
+                 alt="">
+            <p class="mt-2">{{friend.guestDisplayName}}</p>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <!-- BUTTON CANCEL -->
+          <app-button
+            (click)="modal.dismiss()"
+            [type]="'button'"
+            [class]="'btn btn-danger me-2'"
+            [icon]="'bi bi-x-circle-fill me-1'"
+            [label]="'No'"
+          ></app-button>
+
+          <!-- BUTTON REQUEST -->
+          <app-button
+            (click)="shareBag(bag,friend,user)"
+            [type]="'button'"
+            [class]="'btn btn-primary'"
+            [icon]="'bi bi-envelope-fill me-1'"
+            [label]="'Enviar'"
+          ></app-button>
+        </div>
+      </ng-template>
+
+    </li>
+  </ul>
+</ng-container>
+
+
+<div class="w-100 mt-4">
+  <p class="mb-3">Ó también puedes compartirla por:</p>
+  <img style="width: 32px" class="me-3" src="./assets/images/whatsapp.png" alt="whatsapp">
+  <img style="width: 32px" class="me-3" src="./assets/images/gmail.png" alt="gmail">
+</div>

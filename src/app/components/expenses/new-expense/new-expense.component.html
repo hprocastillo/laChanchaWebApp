@@ -1,11 +1,9 @@
+<app-title [title]="'Nuevo Gasto'"></app-title>
+
+
 <form [formGroup]="newExpenseForm" (ngSubmit)="onSubmit()">
 
-  <!------------ TITLE -------------->
-  <div class="form-floating mb-3">
-    <p class="display-5 mb-3">Nuevo Gasto</p>
-  </div>
-
-  <!------------ DESCRIPTION -------------->
+  <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
     <input
       type="text"
@@ -17,8 +15,7 @@
     <label for="descriptionTXT">Descripción</label>
   </div>
 
-
-  <!-----------  AMOUNT ------------>
+  <!-- AMOUNT -->
   <div class="form-floating mb-3">
     <input
       type="number"
@@ -30,17 +27,14 @@
     <label for="amountTXT">Monto S/.</label>
   </div>
 
-
-  <!------------------------------------------->
-  <!----------- CAPTURE IMAGE FILE ------------>
+  <!-- CAPTURE IMAGE FILE -->
   <ng-container *ngIf="!imagePreview">
-    <div class="row mb-3">
-      <div class="col-12">
-        <p class="lead">Adjuntar recibo</p>
-      </div>
+    <div class="w-100 mt-5">
+      <p class="fw-bold">Adjuntar Recibo</p>
     </div>
-    <div class="row">
-      <div class="col-6 d-flex justify-content-center">
+
+    <div class="w-100 d-flex justify-content-between">
+      <div class="w-50 d-flex justify-content-center">
         <div class="container-camera text-center">
           <input
             (change)="showPreview($event)"
@@ -50,7 +44,7 @@
           <p class="text-muted">Tomar Foto</p>
         </div>
       </div>
-      <div class="col-6 d-flex justify-content-center border-start">
+      <div class="w-50 border-start d-flex justify-content-center">
         <div class="container-camera text-center">
           <input
             (change)="showPreview($event)"
@@ -64,54 +58,55 @@
   </ng-container>
 
 
-  <!------------------------------------------------------->
-  <!------------------ IMAGE PREVIEW ---------------------->
+  <!-- IMAGE PREVIEW -->
   <ng-container *ngIf="imagePreview && imagePreview !== ''">
-    <div class="row">
-      <div class="col-12 text-center">
-        <p class="lead">Imagen Previa</p>
-        <img style="max-width: 250px;" [src]="[imagePreview]" alt="">
+    <div class="w-100 mt-5 d-flex justify-content-between">
+      <div class="w-50">
+        <p class="fw-bold">Vista Previa</p>
+      </div>
+      <div class="w-50 text-end">
         <app-button
           (click)="deletePreview()"
           [type]="'button'"
-          [class]="'btn btn-danger ms-2'"
+          [class]="'btn btn-danger'"
           [icon]="'bi bi-trash-fill'"
+          [label]="'Quitar'"
         ></app-button>
       </div>
+    </div>
+
+    <div class="w-100 mt-5 d-flex justify-content-center">
+      <img style="max-width: 250px;" [src]="[imagePreview]" alt="">
     </div>
   </ng-container>
 
 
-  <!----------------------------------------->
-  <!---------------- BUTTONS ---------------->
-  <div class="row fixed-bottom bg-dark p-3">
-    <div class="col-12 d-flex justify-content-between">
+  <!-- BUTTONS FOOTERS -->
+  <div class="w-100 fixed-bottom bg-dark p-3 d-flex justify-content-between">
 
-      <!-- BUTTON CANCEL -->
-      <app-button
-        (click)="goBack()"
-        [type]="'button'"
-        [class]="'btn btn-danger'"
-        [icon]="'bi bi-x-circle-fill me-1'"
-        [label]="'Cancelar'"
-      ></app-button>
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="goBack()"
+      [type]="'button'"
+      [class]="'btn btn-danger'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'Cancelar'"
+    ></app-button>
 
-      <!-- BUTTON SAVE LOADING -->
-      <app-button-save-loading
-        *ngIf="loadingEffect"
-        [type]="'button'"
-        [class]="'btn btn-success'"
-      ></app-button-save-loading>
+    <!-- BUTTON SAVE - LOADING EFFECT -->
+    <app-button-save-loading
+      *ngIf="loadingEffect"
+      [type]="'button'"
+      [class]="'btn btn-success'"
+    ></app-button-save-loading>
 
-      <!-- BUTTON SAVE -->
-      <app-button
-        *ngIf="!loadingEffect"
-        [type]="'submit'"
-        [class]="'btn btn-success'"
-        [icon]="'bi bi-hdd-fill me-1'"
-        [label]="'Guardar'"
-      ></app-button>
-
-    </div>
+    <!-- BUTTON SAVE -->
+    <app-button
+      *ngIf="!loadingEffect"
+      [type]="'submit'"
+      [class]="'btn btn-success'"
+      [icon]="'bi bi-hdd-fill me-1'"
+      [label]="'Guardar'"
+    ></app-button>
   </div>
 </form>

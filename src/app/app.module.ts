@@ -38,6 +38,16 @@ import {
 import {SearchFriendComponent} from './components/friends/search-friend/search-friend.component';
 import {FriendsComponent} from './components/friends/friends/friends.component';
 import {SearchFriendItemComponent} from './components/friends/search-friend-item/search-friend-item.component';
+import {FilterFriendsPipe} from './pipes/filter-friends.pipe';
+import {ShareBagComponent} from './components/bags/share-bag/share-bag.component';
+import {
+  NotificationsFriendsComponent
+} from './components/friends/notifications-friends/notifications-friends.component';
+import {NotificationsBagsComponent} from './components/bags/notifications-bags/notifications-bags.component';
+import { ShareBagRequestComponent } from './components/bags/share-bag-request/share-bag-request.component';
+import { ShareBagRequestItemComponent } from './components/bags/share-bag-request-item/share-bag-request-item.component';
+import { BagsComponent } from './components/bags/bags/bags.component';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +78,14 @@ import {SearchFriendItemComponent} from './components/friends/search-friend-item
     SearchFriendComponent,
     FriendsComponent,
     SearchFriendItemComponent,
+    FilterFriendsPipe,
+    ShareBagComponent,
+    NotificationsFriendsComponent,
+    NotificationsBagsComponent,
+    ShareBagRequestComponent,
+    ShareBagRequestItemComponent,
+    BagsComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +96,7 @@ import {SearchFriendItemComponent} from './components/friends/search-friend-item
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

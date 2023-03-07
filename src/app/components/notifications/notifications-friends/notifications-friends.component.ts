@@ -8,26 +8,30 @@ import {Subject, takeUntil} from "rxjs";
   selector: 'app-notifications-friends',
   templateUrl: './notifications-friends.component.html'
 })
+
 export class NotificationsFriendsComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
-  @Output() btnFriendRequest = new EventEmitter<boolean>();
+  @Output() btnListFriendsRequest = new EventEmitter<boolean>();
+
   listFriendsRequest: FriendRequest[] = [];
+
+  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private friendService: FriendService) {
   }
 
-  private unsubscribe$ = new Subject<boolean>();
-
   ngOnInit(): void {
-    this.friendService.getActiveFriendRequestByGuest(this.user.uid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(res => {
-        this.listFriendsRequest = res;
-      });
+    if (this.user) {
+      this.friendService.getActiveFriendRequest(this.user)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
+          this.listFriendsRequest = res;
+        });
+    }
   }
 
-  goFriendRequest() {
-    this.btnFriendRequest.emit(true);
+  goListFriendsRequest() {
+    this.btnListFriendsRequest.emit(true);
   }
 
   ngOnDestroy(): void {

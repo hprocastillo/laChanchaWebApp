@@ -1,16 +1,18 @@
 import {Timestamp} from "firebase/firestore";
 
 export interface Expense {
-  id: string;
-  bagId: string;
+  id?: string;
   description: string;
   amount: number;
-  receiptUrl: string;
+  receiptURL: string;
 
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
+  bagId?: string;
+  bagDescription: string;
+
+  uid: string;
+  uDisplayName: string | null;
+  uEmail: string | null;
+  uPhotoURL: string | null;
 
   createdAt: Timestamp;
   updatedAt: Timestamp;

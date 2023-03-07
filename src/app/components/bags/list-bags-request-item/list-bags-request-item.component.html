@@ -1,26 +1,27 @@
 <div class="shadow p-3 mb-3 bg-body-tertiary rounded border-0">
 
   <div class="w-100 d-flex justify-content-start">
-    <img style="width: 48px" class="rounded-circle" referrerpolicy="no-referrer" src="{{shareBagRequest.userPhotoUrl}}" alt="">
-    <p class="m-auto ms-2">{{shareBagRequest.userDisplayName | titlecase}}</p>
+    <img alt="" class="rounded-circle" referrerpolicy="no-referrer" src="{{bagRequest.uPhotoURL}}"
+         style="width: 48px">
+    <p class="m-auto ms-2">{{bagRequest.uDisplayName | titlecase}}</p>
   </div>
   <br>
 
   <div class="w-100 d-flex justify-content-center">
     <app-button
-      (click)="rejectRequest(shareBagRequest)"
-      [type]="'button'"
+      (click)="rejectRequest(bagRequest)"
       [class]="'btn btn-danger me-2'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Rechazar'"
+      [type]="'button'"
     ></app-button>
 
     <app-button
-      (click)="agreeRequest(shareBagRequest)"
-      [type]="'button'"
+      (click)="agreeRequest(bagRequest)"
       [class]="'btn btn-success'"
       [icon]="'bi bi-check-circle-fill'"
       [label]="'Aceptar'"
+      [type]="'button'"
     ></app-button>
   </div>
 </div>

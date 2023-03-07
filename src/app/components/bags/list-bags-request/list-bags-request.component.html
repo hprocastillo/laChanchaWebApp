@@ -1,16 +1,16 @@
 <app-title [title]="'Invitaciones a compartir chanchas'"></app-title>
 
-
-<ng-container *ngIf="listShareBagRequest.length > 0; else noResults">
+<ng-container *ngIf="listBagsRequest.length > 0; else noResults">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item p-1 border-0" *ngFor="let shareBagsRequest of listShareBagRequest">
+    <li class="list-group-item p-1 border-0" *ngFor="let bagRequest of listBagsRequest">
 
-      <app-share-bag-request-item [shareBagRequest]="shareBagsRequest"></app-share-bag-request-item>
+      <app-list-bags-request-item
+        [bagRequest]="bagRequest"
+      ></app-list-bags-request-item>
 
     </li>
   </ul>
 </ng-container>
-
 
 <ng-template #noResults>
   <ngb-alert [dismissible]="false" [type]="'success'">

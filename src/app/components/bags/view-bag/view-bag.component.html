@@ -1,27 +1,27 @@
-<!--/////////////////////////////////////////////////-->
-<!--////////////////// EDIT MODE ////////////////////-->
-<!--/////////////////////////////////////////////////-->
+<!-- EDIT MODE -->
 <ng-container *ngIf="editMode; else viewMode">
+  <app-title [title]="'Editar Chancha'"></app-title>
+
   <div class="w-100 d-flex justify-content-between">
     <div class="w-75">
       <div class="form-floating mb-3">
         <input
-          type="text"
+          [(ngModel)]="bag.description"
           class="form-control"
           id="descriptionTXT"
           placeholder="Descripción"
-          [(ngModel)]="bag.description">
-        <label for="descriptionTXT" class="form-label">Descripción</label>
+          type="text">
+        <label class="form-label" for="descriptionTXT">Descripción</label>
       </div>
 
       <div class="form-floating">
         <input
-          type="number"
+          [(ngModel)]="bag.targetAmount"
           class="form-control"
           id="targetAmountTXT"
           placeholder="Monto objetivo"
-          [(ngModel)]="bag.targetAmount">
-        <label for="targetAmountTXT" class="form-label">Monto objetivo</label>
+          type="number">
+        <label class="form-label" for="targetAmountTXT">Monto objetivo</label>
       </div>
     </div>
 
@@ -30,9 +30,9 @@
       <div class="mb-2">
         <app-button
           (click)="openModalEdit(modalEdit)"
-          [type]="'button'"
           [class]="'btn btn-success'"
           [icon]="'bi bi-hdd-fill'"
+          [type]="'button'"
         ></app-button>
       </div>
 
@@ -40,9 +40,9 @@
       <div class="mb-2">
         <app-button
           (click)="getEdit(false)"
-          [type]="'button'"
           [class]="'btn btn-danger'"
           [icon]="'bi bi-x-circle-fill'"
+          [type]="'button'"
         ></app-button>
       </div>
     </div>
@@ -50,9 +50,7 @@
   <hr class="text-muted">
 </ng-container>
 
-<!--/////////////////////////////////////////////////-->
-<!--////////////////// VIEW MODE ////////////////////-->
-<!--/////////////////////////////////////////////////-->
+<!-- VIEW MODE -->
 <ng-template #viewMode>
   <div class="w-100 d-flex justify-content-between">
     <!-- BAG DATA -->
@@ -60,13 +58,13 @@
       <p class="mb-3 lead fw-bold">{{bag.description}}</p>
       <p class="mb-2">
         <i class="bi bi-person-circle me-1"></i>
-        {{bag.userDisplayName | titlecase}}
+        {{bag.uDisplayName | titlecase}}
       </p>
       <p class="mb-2">
         <i class="bi bi-calendar2-week me-1"></i>
         {{bag.createdAt.toDate() | date:'MMM d, y'}}
       </p>
-      <p class="mb-2 fw-bold" [ngStyle]="{'color': bag.collectedAmount < bag.targetAmount ? 'green':'red'}">
+      <p [ngStyle]="{'color': bag.collectedAmount < bag.targetAmount ? 'green':'red'}" class="mb-2 fw-bold">
         Monto recolectado: S/. {{bag.collectedAmount}}
       </p>
       <p class="fw-bold">Monto objetivo: S/. {{bag.targetAmount}}</p>
@@ -78,37 +76,40 @@
       <div class="mb-2">
         <app-button
           (click)="getEdit(true)"
-          [type]="'button'"
           [class]="'btn btn-primary'"
           [icon]="'bi bi-pencil-square'"
+          [type]="'button'"
         ></app-button>
       </div>
       <!-- DELETE -->
       <div class="mb-2">
         <app-button
           (click)="openModalDelete(modalDelete)"
-          [type]="'button'"
           [class]="'btn btn-danger'"
           [icon]="'bi bi-trash-fill'"
+          [type]="'button'"
         ></app-button>
       </div>
       <!-- SHARE -->
       <div class="mb-2">
         <app-button
           (click)="goShareBag()"
-          [type]="'button'"
           [class]="'btn btn-warning'"
           [icon]="'bi bi-share-fill'"
+          [type]="'button'"
         ></app-button>
       </div>
     </div>
   </div>
   <hr class="text-muted">
 
+  <!-- LIST EXPENSES -->
+  <app-list-expenses [bag]="bag"></app-list-expenses>
+
 </ng-template>
 
 
-<!-- MODAL CONFIRM EDIT -->
+<!-- MODAL EDIT -->
 <ng-template #modalEdit let-modal>
   <div class="modal-body text-center">
     <p class="lead">¿Desea guardar los cambios?</p>
@@ -116,19 +117,19 @@
     <!-- BUTTON CANCEL -->
     <app-button
       (click)="modal.dismiss('Cross click')"
-      [type]="'button'"
       [class]="'btn btn-danger me-2'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Cancelar'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON SAVE -->
     <app-button
       (click)="onSave(bag)"
-      [type]="'button'"
       [class]="'btn btn-success'"
       [icon]="'bi bi-hdd-fill me-1'"
       [label]="'Guardar'"
+      [type]="'button'"
     ></app-button>
   </div>
 </ng-template>
@@ -146,23 +147,19 @@
     <!-- BUTTON CANCEL -->
     <app-button
       (click)="modal.dismiss('Cross click')"
-      [type]="'button'"
       [class]="'btn btn-secondary me-2'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Cancelar'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON DELETE -->
     <app-button
       (click)="onDelete(bag)"
-      [type]="'button'"
       [class]="'btn btn-danger'"
       [icon]="'bi bi-trash-fill me-1'"
       [label]="'Borrar'"
+      [type]="'button'"
     ></app-button>
   </div>
 </ng-template>
-
-
-<!-- LIST EXPENSES -->
-<app-list-expenses [bag]="bag" [user]="user"></app-list-expenses>

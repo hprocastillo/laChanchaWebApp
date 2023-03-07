@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BagService} from "../../../services/bag.service";
 import {Bag} from "../../../interfaces/bag";
-import {User} from "@angular/fire/auth";
 import {Timestamp} from "firebase/firestore";
+import {User} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-new-bag',
@@ -11,7 +11,8 @@ import {Timestamp} from "firebase/firestore";
 })
 export class NewBagComponent {
   @Input() user = {} as User;
-  @Output() btnBack = new EventEmitter<boolean>();
+  @Output() btnCancel = new EventEmitter<boolean>();
+
   newBagForm: FormGroup;
   loadingEffect: boolean = false;
   shareCode: string = "";
@@ -28,35 +29,31 @@ export class NewBagComponent {
     }
   }
 
-  goBack() {
-    this.btnBack.emit(true);
+  goCancel() {
+    this.btnCancel.emit(true);
   }
 
-  async onSubmit() {
+  async onSubmit(user: User) {
     this.loadingEffect = true;
-    let newBag: Bag;
+    let newBag = {} as Bag;
 
     if (this.newBagForm.valid) {
       newBag = this.newBagForm.value;
       newBag.collectedAmount = 0;
-      newBag.share = false;
+      newBag.shared = false;
       newBag.shareCode = this.shareCode;
-      newBag.userId = this.user.uid;
-      if (this.user.displayName != null) {
-        newBag.userDisplayName = this.user.displayName;
-      }
-      if (this.user.email != null) {
-        newBag.userEmail = this.user.email;
-      }
-      if (this.user.photoURL != null) {
-        newBag.userPhotoUrl = this.user.photoURL;
-      }
+
+      newBag.uid = user.uid;
+      newBag.uDisplayName = user.displayName;
+      newBag.uEmail = user.email;
+      newBag.uPhotoURL = user.photoURL;
+
       newBag.createdAt = Timestamp.fromDate(new Date());
 
       try {
         await this.bagService.addBag(newBag);
         this.newBagForm.reset();
-        this.goBack();
+        this.goCancel();
 
       } catch (e) {
         console.log(e);

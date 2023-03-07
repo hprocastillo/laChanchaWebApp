@@ -1,6 +1,6 @@
-<div class="shadow p-2 mb-2 bg-body-tertiary rounded border-0" (click)="openModalRequest(modalRequest)">
+<div (click)="openModalRequest(modalRequest)" class="shadow p-2 mb-2 bg-body-tertiary rounded border-0">
   <div class="w-100 d-flex justify-content-start">
-    <img style="width: 48px" class="rounded-circle" referrerpolicy="no-referrer" src="{{users.photoURL}}" alt="">
+    <img alt="" class="rounded-circle" referrerpolicy="no-referrer" src="{{users.photoURL}}" style="width: 48px">
     <p class="m-auto ms-2">{{users.displayName | titlecase}}</p>
   </div>
 </div>
@@ -12,8 +12,8 @@
     <p class="lead fw-bold">Solicitud de amistad.</p>
 
     <div class="d-flex justify-content-start">
-      <img style="width: 48px" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
-           alt="">
+      <img alt="" class="rounded-circle me-2" referrerpolicy="no-referrer" src="{{users.photoURL}}"
+           style="width: 48px">
       <p class="mt-2">{{users.displayName}}</p>
     </div>
   </div>
@@ -21,19 +21,19 @@
     <!-- BUTTON CANCEL -->
     <app-button
       (click)="modal.dismiss()"
-      [type]="'button'"
       [class]="'btn btn-danger me-2'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'No'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON DELETE -->
     <app-button
-      (click)="sendingRequest(user, users)"
-      [type]="'button'"
+      (click)="sendingRequest(users)"
       [class]="'btn btn-primary'"
       [icon]="'bi bi-envelope-fill me-1'"
       [label]="'Enviar'"
+      [type]="'button'"
     ></app-button>
   </div>
 </ng-template>

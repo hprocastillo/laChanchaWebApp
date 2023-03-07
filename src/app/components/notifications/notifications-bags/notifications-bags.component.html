@@ -1,0 +1,8 @@
+<ng-container *ngIf="listBagsRequest.length > 0">
+
+  <ngb-alert [animation]="true" [dismissible]="false" [type]="'warning'">
+    <p (click)="goListBagsRequest()" class="m-0" style="cursor: pointer">Tienes
+      <strong>{{listBagsRequest.length}}</strong> invitación a una chancha.</p>
+  </ngb-alert>
+
+</ng-container>

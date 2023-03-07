@@ -7,23 +7,28 @@ import {User} from "@angular/fire/auth";
 })
 export class ButtonBarComponent {
   @Input() user = {} as User;
-  @Input() bagsTemplate: boolean | undefined;
-  @Input() shareBagTemplate: boolean | undefined;
-  @Input() shareBagRequestTemplate: boolean | undefined;
-  @Input() friendsTemplate: boolean | undefined;
-  @Input() friendsRequestTemplate: boolean | undefined;
+  //BAGS TEMPLATES
+  @Input() listBagsTemplate: boolean | undefined;
   @Input() viewBagTemplate: boolean | undefined;
-  @Input() searchFriendTemplate: boolean | undefined;
+  @Input() shareBagTemplate: boolean | undefined;
+  @Input() listBagsRequestTemplate: boolean | undefined;
 
-  @Output() btnBags = new EventEmitter<boolean>();
+  //FRIENDS TEMPLATES
+  @Input() listFriendsTemplate: boolean | undefined;
+  @Input() listFriendsRequestTemplate: boolean | undefined;
+  @Input() searchFriendTemplate: boolean | undefined;
+  @Input() viewFriendsTemplate: boolean | undefined;
+
+  //OUTPUTS
+  @Output() btnListBags = new EventEmitter<boolean>();
   @Output() btnNewBag = new EventEmitter<boolean>();
   @Output() btnViewBag = new EventEmitter<boolean>();
-  @Output() btnFriends = new EventEmitter<boolean>();
+  @Output() btnListFriends = new EventEmitter<boolean>();
   @Output() btnNewExpense = new EventEmitter<boolean>()
-  @Output() btnSearchFriend = new EventEmitter<boolean>();
+  @Output() btnSearchFriends = new EventEmitter<boolean>();
 
-  goBags() {
-    this.btnBags.emit(true);
+  goListBags() {
+    this.btnListBags.emit(true);
   }
 
   goNewBag() {
@@ -38,11 +43,11 @@ export class ButtonBarComponent {
     this.btnNewExpense.emit(true);
   }
 
-  goFriends() {
-    this.btnFriends.emit(true);
+  goListFriends() {
+    this.btnListFriends.emit(true);
   }
 
-  goSearchFriend() {
-    this.btnSearchFriend.emit(true);
+  goSearchFriends() {
+    this.btnSearchFriends.emit(true);
   }
 }

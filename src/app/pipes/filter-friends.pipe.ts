@@ -9,10 +9,10 @@ export class FilterFriendsPipe implements PipeTransform {
   transform(items: Array<Friend>, searchText: string) {
     const data = searchText.toLowerCase();
     return items.filter(item =>
-      item.guestDisplayName?.toLowerCase() === data ||
-      item.guestEmail?.toLowerCase() === data ||
-      item.guestDisplayName?.toLowerCase().includes(data) ||
-      item.guestEmail?.toLowerCase().includes(data)
+      item.gDisplayName?.toLowerCase() === data ||
+      item.gEmail?.toLowerCase() === data ||
+      item.gDisplayName?.toLowerCase().includes(data) ||
+      item.gEmail?.toLowerCase().includes(data)
     );
   }
 }

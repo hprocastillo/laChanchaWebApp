@@ -4,7 +4,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ExpenseService} from "../../../services/expense.service";
 import {BagService} from "../../../services/bag.service";
 import {Bag} from "../../../interfaces/bag";
-import {User} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-list-expenses-item',
@@ -13,7 +12,6 @@ import {User} from "@angular/fire/auth";
 export class ListExpensesItemComponent {
   @Input() expense = {} as Expense;
   @Input() bag = {} as Bag;
-  @Input() user = {} as User;
 
   constructor(
     private modalService: NgbModal,
@@ -27,10 +25,12 @@ export class ListExpensesItemComponent {
 
   async deleteExpense(expense: Expense, bag: Bag) {
     bag.collectedAmount = bag.collectedAmount - expense.amount;
+
     try {
       await this.expenseService.deleteExpense(expense);
       await this.bagService.updateBag(bag);
       this.modalService.dismissAll();
+
     } catch (e) {
       console.log(e);
     }

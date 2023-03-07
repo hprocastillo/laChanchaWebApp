@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {User} from "@angular/fire/auth";
 import {Bag} from "../../../interfaces/bag";
 import {BagService} from "../../../services/bag.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -7,6 +6,7 @@ import {Timestamp} from "firebase/firestore";
 import {ExpenseService} from "../../../services/expense.service";
 import {Subject, takeUntil} from "rxjs";
 import {Expense} from "../../../interfaces/expense";
+import {User} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-view-bag',
@@ -19,8 +19,9 @@ export class ViewBagComponent implements OnInit, OnDestroy {
   @Output() btnShareBag = new EventEmitter<boolean>();
 
   editMode: boolean = false;
-  msgError: string | undefined;
-  listExpenseByBag: Expense[] = [];
+  msgError: string = "";
+  listExpenses: Expense[] = [];
+  private unsubscribe$ = new Subject<boolean>();
 
   constructor(
     private modalService: NgbModal,
@@ -28,14 +29,12 @@ export class ViewBagComponent implements OnInit, OnDestroy {
     private expenseService: ExpenseService) {
   }
 
-  private unsubscribe$ = new Subject<boolean>();
-
   ngOnInit(): void {
-    if (this.user.uid && this.bag.id) {
-      this.expenseService.getExpensesByBag(this.user.uid, this.bag.id)
+    if (this.bag) {
+      this.expenseService.getExpensesByBag(this.bag)
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(res => {
-          this.listExpenseByBag = res;
+          this.listExpenses = res;
         });
     }
   }
@@ -69,7 +68,7 @@ export class ViewBagComponent implements OnInit, OnDestroy {
   }
 
   async onDelete(bag: Bag) {
-    if (this.listExpenseByBag.length > 0) {
+    if (this.listExpenses.length > 0) {
       this.msgError = "No se puede borrar la chancha porque contiene gastos.";
     } else {
       try {

@@ -1,26 +1,23 @@
 <app-title [title]="'Buscar Amigos'"></app-title>
 
-
 <div class="w-100">
   <div class="form-floating mb-3">
     <input
-      type="text"
+      [(ngModel)]="searchText"
+      autofocus
       class="form-control"
       id="searchTEXT"
-      [(ngModel)]="searchText"
       placeholder="Buscar por nombre o correo electrónico"
-      autofocus>
+      type="text">
     <label for="searchTEXT">Buscar por nombre o correo electrónico</label>
   </div>
 </div>
 
-
 <ng-container *ngIf="searchText">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item p-1 border-0" *ngFor="let users of listUsers | filterUsers:searchText">
+    <li *ngFor="let users of listUsers | filterUsers:searchText" class="list-group-item p-1 border-0">
 
       <app-search-friend-item
-        [user]="user"
         [users]="users"
       ></app-search-friend-item>
 

@@ -18,27 +18,27 @@ export class ListFriendRequestItemComponent {
     friendRequest.response = true;
 
     let newFriend1 = {} as Friend;
-    newFriend1.userId = friendRequest.guestId;
-    newFriend1.userDisplayName = friendRequest.guestDisplayName;
-    newFriend1.userEmail = friendRequest.guestEmail;
-    newFriend1.userPhotoUrl = friendRequest.guestPhotoUrl;
+    newFriend1.uid = friendRequest.guid;
+    newFriend1.uDisplayName = friendRequest.gDisplayName;
+    newFriend1.uEmail = friendRequest.gEmail;
+    newFriend1.uPhotoURL = friendRequest.gPhotoURL;
 
-    newFriend1.guestId = friendRequest.userId;
-    newFriend1.guestDisplayName = friendRequest.userDisplayName;
-    newFriend1.guestEmail = friendRequest.userEmail;
-    newFriend1.guestPhotoUrl = friendRequest.userPhotoUrl;
+    newFriend1.guid = friendRequest.uid;
+    newFriend1.gDisplayName = friendRequest.uDisplayName;
+    newFriend1.gEmail = friendRequest.uEmail;
+    newFriend1.gPhotoURL = friendRequest.uPhotoURL;
     newFriend1.createdAt = Timestamp.fromDate(new Date());
 
     let newFriend2 = {} as Friend;
-    newFriend2.userId = friendRequest.userId;
-    newFriend2.userDisplayName = friendRequest.userDisplayName;
-    newFriend2.userEmail = friendRequest.userEmail;
-    newFriend2.userPhotoUrl = friendRequest.userPhotoUrl;
+    newFriend2.uid = friendRequest.uid;
+    newFriend2.uDisplayName = friendRequest.uDisplayName;
+    newFriend2.uEmail = friendRequest.uEmail;
+    newFriend2.uPhotoURL = friendRequest.uPhotoURL;
 
-    newFriend2.guestId = friendRequest.guestId;
-    newFriend2.guestDisplayName = friendRequest.guestDisplayName;
-    newFriend2.guestEmail = friendRequest.guestEmail;
-    newFriend2.guestPhotoUrl = friendRequest.guestPhotoUrl;
+    newFriend2.guid = friendRequest.guid;
+    newFriend2.gDisplayName = friendRequest.gDisplayName;
+    newFriend2.gEmail = friendRequest.gEmail;
+    newFriend2.gPhotoURL = friendRequest.gPhotoURL;
     newFriend2.createdAt = Timestamp.fromDate(new Date());
 
     try {

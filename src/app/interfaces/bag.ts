@@ -1,42 +1,59 @@
 import {Timestamp} from "firebase/firestore";
 
 export interface Bag {
-  id: string;
+  id?: string;
   description: string;
   collectedAmount: number;
   targetAmount: number;
-
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
-
-  share: boolean;
+  shared: boolean;
   shareCode: string;
-  guests: [{
-    guestId: string;
-    guestDisplayName: string;
-    guestEmail: string;
-    guestPhotoUrl: string;
-  }];
+
+  uid: string;
+  uDisplayName: string | null;
+  uEmail: string | null;
+  uPhotoURL: string | null;
+
   createdAt: Timestamp;
   updatedAt: Timestamp;
 }
 
-export interface ShareBagRequest {
-  id: string;
-  active: boolean;// "T" = waiting answer // "F" = answered
-  response: boolean;// "T" = positive // "F" = negative
+export interface BagDetail {
+  id?: string;
 
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
+  bagId?: string;
+  bagDescription: string;
 
-  guestId: string;
-  guestDisplayName: string;
-  guestEmail: string;
-  guestPhotoUrl: string;
+  guid: string;
+  gDisplayName: string | null;
+  gEmail: string | null;
+  gPhotoURL: string | null;
+
+  uid: string;
+  uDisplayName: string | null;
+  uEmail: string | null;
+  uPhotoURL: string | null;
+
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+export interface BagRequest {
+  id?: string;
+  active: boolean;
+  response: boolean;
+
+  bagId?: string;
+  bagDescription: string;
+
+  guid: string;
+  gDisplayName: string | null;
+  gEmail: string | null;
+  gPhotoURL: string | null;
+
+  uid: string;
+  uDisplayName: string | null;
+  uEmail: string | null;
+  uPhotoURL: string | null;
 
   createdAt: Timestamp;
   updatedAt: Timestamp;

@@ -1,29 +1,28 @@
 <app-title [title]="'Nueva Chancha'"></app-title>
 
-
-<form [formGroup]="newBagForm" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit(user)" [formGroup]="newBagForm">
 
   <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
     <input
-      type="text"
       class="form-control"
+      formControlName="description"
       id="descriptionTXT"
       placeholder="Descripción"
-      formControlName="description"
-      required>
+      required
+      type="text">
     <label for="descriptionTXT">Descripción</label>
   </div>
 
   <!-- TARGET AMOUNT -->
   <div class="form-floating mb-2">
     <input
-      type="number"
       class="form-control"
+      formControlName="targetAmount"
       id="targetAmountTXT"
       placeholder="Monto objetivo S/."
-      formControlName="targetAmount"
-      required>
+      required
+      type="number">
     <label for="targetAmountTXT">Monto objetivo S/.</label>
   </div>
 
@@ -32,27 +31,27 @@
 
     <!-- BUTTON CANCEL -->
     <app-button
-      (click)="goBack()"
-      [type]="'button'"
+      (click)="goCancel()"
       [class]="'btn btn-danger'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Cancelar'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON SAVE - LOADING EFFECT -->
     <app-button-save-loading
       *ngIf="loadingEffect"
-      [type]="'button'"
       [class]="'btn btn-success'"
+      [type]="'button'"
     ></app-button-save-loading>
 
     <!-- BUTTON SAVE -->
     <app-button
       *ngIf="!loadingEffect"
-      [type]="'submit'"
       [class]="'btn btn-success'"
       [icon]="'bi bi-hdd-fill me-1'"
       [label]="'Guardar'"
+      [type]="'submit'"
     ></app-button>
 
   </div>

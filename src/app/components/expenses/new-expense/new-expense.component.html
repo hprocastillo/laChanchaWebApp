@@ -1,29 +1,28 @@
 <app-title [title]="'Nuevo Gasto'"></app-title>
 
-
-<form [formGroup]="newExpenseForm" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit(bag, user)" [formGroup]="newExpenseForm">
 
   <!-- DESCRIPTION -->
   <div class="form-floating mb-3">
     <input
-      type="text"
       class="form-control"
+      formControlName="description"
       id="descriptionTXT"
       placeholder="Descripción"
-      formControlName="description"
-      required>
+      required
+      type="text">
     <label for="descriptionTXT">Descripción</label>
   </div>
 
   <!-- AMOUNT -->
   <div class="form-floating mb-3">
     <input
-      type="number"
       class="form-control"
+      formControlName="amount"
       id="amountTXT"
       placeholder="Monto objetivo S/."
-      formControlName="amount"
-      required>
+      required
+      type="number">
     <label for="amountTXT">Monto S/.</label>
   </div>
 
@@ -38,9 +37,9 @@
         <div class="container-camera text-center">
           <input
             (change)="showPreview($event)"
-            type="file"
-            accept="image/*;capture=camera">
-          <img src="./assets/images/camera.png" alt="camera">
+            accept="image/*;capture=camera"
+            type="file">
+          <img alt="camera" src="./assets/images/camera.png">
           <p class="text-muted">Tomar Foto</p>
         </div>
       </div>
@@ -48,9 +47,9 @@
         <div class="container-camera text-center">
           <input
             (change)="showPreview($event)"
-            type="file"
-            accept="image/*">
-          <img src="./assets/images/upload.png" alt="camera">
+            accept="image/*"
+            type="file">
+          <img alt="camera" src="./assets/images/upload.png">
           <p class="text-muted">Subir imagen</p>
         </div>
       </div>
@@ -67,16 +66,16 @@
       <div class="w-50 text-end">
         <app-button
           (click)="deletePreview()"
-          [type]="'button'"
           [class]="'btn btn-danger'"
           [icon]="'bi bi-trash-fill'"
           [label]="'Quitar'"
+          [type]="'button'"
         ></app-button>
       </div>
     </div>
 
     <div class="w-100 mt-5 d-flex justify-content-center">
-      <img style="max-width: 250px;" [src]="[imagePreview]" alt="">
+      <img [src]="[imagePreview]" alt="" style="max-width: 250px;">
     </div>
   </ng-container>
 
@@ -86,27 +85,27 @@
 
     <!-- BUTTON CANCEL -->
     <app-button
-      (click)="goBack()"
-      [type]="'button'"
+      (click)="goCancel()"
       [class]="'btn btn-danger'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Cancelar'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON SAVE - LOADING EFFECT -->
     <app-button-save-loading
       *ngIf="loadingEffect"
-      [type]="'button'"
       [class]="'btn btn-success'"
+      [type]="'button'"
     ></app-button-save-loading>
 
     <!-- BUTTON SAVE -->
     <app-button
       *ngIf="!loadingEffect"
-      [type]="'submit'"
       [class]="'btn btn-success'"
       [icon]="'bi bi-hdd-fill me-1'"
       [label]="'Guardar'"
+      [type]="'submit'"
     ></app-button>
   </div>
 </form>

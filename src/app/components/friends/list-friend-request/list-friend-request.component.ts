@@ -11,18 +11,19 @@ import {FriendRequest} from "../../../interfaces/friend";
 export class ListFriendRequestComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
   listFriendsRequests: FriendRequest[] = [];
+  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private friendService: FriendService) {
   }
 
-  private unsubscribe$ = new Subject<boolean>();
-
   ngOnInit() {
-    this.friendService.getActiveFriendRequestByGuest(this.user.uid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(res => {
-        this.listFriendsRequests = res;
-      });
+    if (this.user) {
+      this.friendService.getActiveFriendRequest(this.user)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
+          this.listFriendsRequests = res;
+        });
+    }
   }
 
   ngOnDestroy(): void {

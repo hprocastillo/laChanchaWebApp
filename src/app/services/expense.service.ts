@@ -5,7 +5,7 @@ import {
   collectionData,
   deleteDoc,
   doc,
-  Firestore, orderBy,
+  Firestore,
   query,
   updateDoc,
   where
@@ -13,7 +13,6 @@ import {
 import {Expense} from "../interfaces/expense";
 import {Observable} from "rxjs";
 import {Bag} from "../interfaces/bag";
-import {User} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -28,16 +27,9 @@ export class ExpenseService {
     return addDoc(ref, expense);
   }
 
-  getAllExpenses(): Observable<Expense[]> {
+  getExpensesByBag(bag: Bag): Observable<Expense[]> {
     const ref = collection(this.firestore, 'expenses');
-    return collectionData(ref, {idField: 'id'}) as Observable<Expense[]>;
-  }
-
-  getExpensesByBag(userId: string, bagId: string): Observable<Expense[]> {
-    const ref = collection(this.firestore, 'expenses');
-    const q = query(ref,
-      where('userId', "==", userId),
-      where('bagId', "==", bagId));
+    const q = query(ref, where('bagId', "==", bag.id));
     return collectionData(q, {idField: 'id'}) as Observable<Expense[]>;
   }
 

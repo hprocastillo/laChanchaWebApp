@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Auth, signInWithPopup, User, GoogleAuthProvider, signOut, authState} from "@angular/fire/auth";
+import {Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User} from "@angular/fire/auth";
 import {EMPTY, Observable} from "rxjs";
 import {doc, Firestore, setDoc} from "@angular/fire/firestore";
 import {Timestamp} from "firebase/firestore";
@@ -39,5 +39,4 @@ export class AuthService {
   logout() {
     return signOut(this.auth);
   }
-
 }

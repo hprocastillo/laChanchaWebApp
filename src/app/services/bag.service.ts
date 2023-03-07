@@ -5,38 +5,39 @@ import {
   collectionData,
   deleteDoc,
   doc,
-  Firestore, orderBy,
+  docData,
+  Firestore,
   query,
   updateDoc,
   where
 } from "@angular/fire/firestore";
-import {Bag, ShareBagRequest} from "../interfaces/bag";
+import {Bag, BagDetail, BagRequest} from "../interfaces/bag";
 import {Observable} from "rxjs";
+import {User} from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BagService {
-
   constructor(private firestore: Firestore) {
   }
 
+  /////////////////// CRUD BAG /////////////////////
   addBag(bag: Bag) {
     const ref = collection(this.firestore, 'bags');
     return addDoc(ref, bag);
   }
 
-  getAllBags(): Observable<Bag[]> {
+  getBagsByUser(user: User): Observable<Bag[]> {
     const ref = collection(this.firestore, 'bags');
-    return collectionData(ref, {idField: 'id'}) as Observable<Bag[]>;
-  }
-
-  getBagsByUser(userId: string): Observable<Bag[]> {
-    const ref = collection(this.firestore, 'bags');
-    const q = query(ref, where("userId", "==", userId), orderBy("createdAt", "desc"));
+    const q = query(ref, where("uid", "==", user.uid));
     return collectionData(q, {idField: 'id'}) as Observable<Bag[]>;
   }
 
+  getBagById(bag: Bag): Observable<Bag> {
+    const ref = doc(this.firestore, `bags/${bag.id}`);
+    return docData(ref, {idField: 'id'}) as Observable<Bag>;
+  }
 
   deleteBag(bag: Bag) {
     const ref = doc(this.firestore, `bags/${bag.id}`);
@@ -48,27 +49,34 @@ export class BagService {
     return updateDoc(ref, {...bag});
   }
 
-  /////////////////////////////////////////////////
-  //////////////// BAG REQUESTS ///////////////////
-  /////////////////////////////////////////////////
-  addShareBagRequest(shareBagRequest: ShareBagRequest) {
-    const ref = collection(this.firestore, 'shareBagRequests');
-    return addDoc(ref, shareBagRequest);
+  /////////// CRUD BAG REQUEST /////////////
+  addBagRequest(bagRequest: BagRequest) {
+    const ref = collection(this.firestore, 'bagsRequest');
+    return addDoc(ref, bagRequest);
   }
 
-  getActiveShareBagRequestByGuest(guestId: string): Observable<ShareBagRequest[]> {
-    const ref = collection(this.firestore, 'shareBagRequests');
+  getActiveBagRequest(user: User): Observable<BagRequest[]> {
+    const ref = collection(this.firestore, 'bagsRequest');
     const q = query(ref,
-      where("guestId", "==", guestId),
+      where("guid", "==", user.uid),
       where("active", "==", true),
       where("response", "==", false));
-    return collectionData(q, {idField: 'id'}) as Observable<ShareBagRequest[]>;
+    return collectionData(q, {idField: 'id'}) as Observable<BagRequest[]>;
   }
 
-  updateShareBagRequest(shareBagRequest: ShareBagRequest) {
-    const ref = doc(this.firestore, `shareBagRequests/${shareBagRequest.id}`);
-    return updateDoc(ref, {...shareBagRequest});
+  updateBagRequest(bagRequest: BagRequest) {
+    const ref = doc(this.firestore, `bagsRequest/${bagRequest.id}`);
+    return updateDoc(ref, {...bagRequest});
   }
 
+  /////////// CRUD BAG DETAIL ///////////////
+  addBagDetail(bagDetail: BagDetail) {
+    const ref = collection(this.firestore, 'bagsDetail');
+    return addDoc(ref, bagDetail);
+  }
 
+  updateBagDetail(bagDetail: BagDetail) {
+    const ref = doc(this.firestore, `bagsDetail/${bagDetail.id}`);
+    return updateDoc(ref, {...bagDetail});
+  }
 }

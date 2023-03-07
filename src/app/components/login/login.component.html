@@ -9,16 +9,16 @@
       <form>
         <!-- USERNAME -->
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="mailTXT" placeholder="Correo electrónico">
+          <input class="form-control" id="mailTXT" placeholder="Correo electrónico" type="text">
           <label for="mailTXT">Correo electrónico</label>
         </div>
         <!-- PASSWORD -->
         <div class="form-floating mb-2">
-          <input type="password" class="form-control" id="passTXT" placeholder="Contraseña">
+          <input class="form-control" id="passTXT" placeholder="Contraseña" type="password">
           <label for="passTXT">Contraseña</label>
         </div>
         <div class="form-floating mb-3 text-start">
-          <a class="small text-decoration-none" [routerLink]="''">Recuperar contraseña</a>
+          <a [routerLink]="''" class="small text-decoration-none">Recuperar contraseña</a>
         </div>
       </form>
 
@@ -36,17 +36,17 @@
 
       <app-button
         (click)="loginGoogle()"
-        [type]="'button'"
         [class]="'btn btn-secondary w-75 mb-3'"
         [icon]="'bi bi-google me-2'"
         [label]="'Continuar con google'"
+        [type]="'button'"
       ></app-button>
 
       <app-button
-        [type]="'button'"
         [class]="'btn btn-primary w-75'"
         [icon]="'bi bi-facebook me-2'"
         [label]="'Continuar con facebook'"
+        [type]="'button'"
       ></app-button>
 
 

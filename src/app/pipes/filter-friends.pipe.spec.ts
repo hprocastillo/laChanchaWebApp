@@ -1,4 +1,4 @@
-import { FilterFriendsPipe } from './filter-friends.pipe';
+import {FilterFriendsPipe} from './filter-friends.pipe';
 
 describe('FilterFriendsPipe', () => {
   it('create an instance', () => {

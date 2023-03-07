@@ -16,20 +16,20 @@ export class DashboardComponent {
   buttonBarTemplate: boolean = true;
 
   //BAGS TEMPLATES
-  bagsTemplate: boolean = true;
+  listBagsTemplate: boolean = true;
   newBagTemplate: boolean = false;
   viewBagTemplate: boolean = false;
   shareBagTemplate: boolean = false;
-  shareBagRequestTemplate: boolean = false;
+  listBagsRequestTemplate: boolean = false;
+
+  //FRIENDS TEMPLATES
+  listFriendsTemplate: boolean = false;
+  listFriendsRequestTemplate: boolean = false;
+  searchFriendTemplate: boolean = false;
+  viewFriendTemplate: boolean = false;
 
   //EXPENSES TEMPLATES
   newExpenseTemplate: boolean = false;
-
-  //FRIENDS TEMPLATES
-  friendsTemplate: boolean = false;
-  viewFriendTemplate: boolean = false;
-  friendsRequestTemplate: boolean = false;
-  searchFriendTemplate: boolean = false;
 
   constructor(public authService: AuthService) {
   }
@@ -40,61 +40,44 @@ export class DashboardComponent {
     this.showViewBagTemplate();
   }
 
-  showBagsTemplate() {
-    this.friendsTemplate = false;
+  showListBagsTemplate() {
+    this.listFriendsTemplate = false;
     this.newBagTemplate = false;
     this.viewBagTemplate = false;
-    this.shareBagRequestTemplate = false;
-    this.bagsTemplate = true;
+    this.listBagsTemplate = true;
   }
 
   showNewBagTemplate() {
-    this.bagsTemplate = false;
+    this.listBagsTemplate = false;
     this.newBagTemplate = true;
   }
 
   showViewBagTemplate() {
-    this.bagsTemplate = false;
+    this.listBagsTemplate = false;
     this.newExpenseTemplate = false;
     this.shareBagTemplate = false;
     this.viewBagTemplate = true;
   }
 
-  showShareBag() {
+  showShareBagTemplate() {
     this.viewBagTemplate = false;
     this.shareBagTemplate = true;
   }
 
-  showShareBagRequest() {
-    this.bagsTemplate = false;
-    this.shareBagRequestTemplate = true;
-  }
-
   //FRIENDS FUNCTIONS
-  showFriendsTemplate() {
-    this.bagsTemplate = false;
-    this.friendsRequestTemplate = false;
-    this.searchFriendTemplate = false;
-    this.friendsTemplate = true;
-  }
-
-  showViewFriendTemplate() {
-    this.friendsTemplate = false;
-    this.viewFriendTemplate = true;
-  }
-
-  showListFriendsRequest() {
-    this.friendsTemplate = false;
-    this.friendsRequestTemplate = true;
-  }
-
   getSelectedFriend(friend: Friend) {
     this.selectedFriend = friend;
-    this.showViewFriendTemplate();
+    this.showListFriendsTemplate();
   }
 
-  showSearchFriend() {
-    this.friendsTemplate = false;
+  showListFriendsTemplate() {
+    this.listBagsTemplate = false;
+    this.searchFriendTemplate = false;
+    this.listFriendsTemplate = true;
+  }
+
+  showSearchFriendsTemplate() {
+    this.listFriendsTemplate = false;
     this.searchFriendTemplate = true;
   }
 

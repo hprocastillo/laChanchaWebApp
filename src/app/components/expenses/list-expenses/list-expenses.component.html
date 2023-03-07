@@ -1,11 +1,10 @@
 <ng-container *ngIf="listExpenses.length > 0; else noResults">
   <ul class="list-group list-group-flush overflow-y-auto">
-    <li style="cursor: pointer" class="list-group-item border-0" *ngFor="let expense of listExpenses">
+    <li class="list-group-item border-0" style="cursor: pointer" *ngFor="let expense of listExpenses">
 
       <app-list-expenses-item
-        [expense]="expense"
-        [user]="user"
         [bag]="bag"
+        [expense]="expense"
       ></app-list-expenses-item>
 
     </li>
@@ -15,7 +14,6 @@
     <br>
   </ul>
 </ng-container>
-
 
 <ng-template #noResults>
   <ngb-alert [dismissible]="false" [type]="'success'">

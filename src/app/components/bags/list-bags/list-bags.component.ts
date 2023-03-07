@@ -12,18 +12,19 @@ export class ListBagsComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
   @Output() selectedBag = new EventEmitter<Bag>();
   listBags: Bag[] = [];
+  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private bagService: BagService) {
   }
 
-  private unsubscribe$ = new Subject<boolean>();
-
   ngOnInit(): void {
-    this.bagService.getBagsByUser(this.user.uid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(res => {
-        this.listBags = res;
-      });
+    if (this.user) {
+      this.bagService.getBagsByUser(this.user)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
+          this.listBags = res;
+        });
+    }
   }
 
   getSelectedBag(bag: Bag) {

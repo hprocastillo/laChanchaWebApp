@@ -16,11 +16,11 @@ import {Timestamp} from "firebase/firestore";
 export class NewExpenseComponent {
   @Input() user = {} as User;
   @Input() bag = {} as Bag;
-  @Output() btnBackToViewBag = new EventEmitter<boolean>();
+  @Output() btnCancel = new EventEmitter<boolean>();
 
   loadingEffect: boolean = false;
   newExpenseForm: FormGroup;
-  imagePreview: string | undefined;
+  imagePreview: string = "";
   file: string | any;
 
   constructor(
@@ -34,8 +34,8 @@ export class NewExpenseComponent {
     });
   }
 
-  goBack() {
-    this.btnBackToViewBag.emit(true);
+  goCancel() {
+    this.btnCancel.emit(true);
   }
 
   showPreview(event: any) {
@@ -51,24 +51,23 @@ export class NewExpenseComponent {
     this.imagePreview = '';
   }
 
-  async onSubmit() {
+  async onSubmit(bag: Bag, user: User) {
     this.loadingEffect = true;
+
     let newExpense: Expense;
-    let newBag: Bag = this.bag;
+    let newBag: Bag = bag;
 
     if (this.newExpenseForm.valid) {
       newExpense = this.newExpenseForm.value;
-      newExpense.bagId = this.bag.id;
-      newExpense.userId = this.user.uid;
-      if (this.user.displayName != null) {
-        newExpense.userDisplayName = this.user.displayName;
-      }
-      if (this.user.email != null) {
-        newExpense.userEmail = this.user.email;
-      }
-      if (this.user.photoURL != null) {
-        newExpense.userPhotoUrl = this.user.photoURL;
-      }
+
+      newExpense.bagId = bag.id;
+      newExpense.bagDescription = bag.description;
+
+      newExpense.uid = user.uid;
+      newExpense.uDisplayName = user.displayName;
+      newExpense.uEmail = user.email;
+      newExpense.uPhotoURL = user.photoURL;
+
       newExpense.createdAt = Timestamp.fromDate(new Date());
 
       if (this.file) {
@@ -76,7 +75,7 @@ export class NewExpenseComponent {
         uploadBytes(storageRef, this.file)
           .then(async res => {
             console.log(res);
-            newExpense.receiptUrl = await getDownloadURL(storageRef);
+            newExpense.receiptURL = await getDownloadURL(storageRef);
             await this.expenseService.addExpense(newExpense);
           })
           .catch(error => console.log(error));
@@ -88,7 +87,7 @@ export class NewExpenseComponent {
       newBag.collectedAmount = newBag.collectedAmount + newExpense.amount;
       await this.bagService.updateBag(newBag);
       this.newExpenseForm.reset();
-      this.goBack();
+      this.goCancel();
     }
   }
 }

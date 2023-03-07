@@ -10,20 +10,24 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class ListFriendsComponent implements OnInit, OnDestroy {
   @Input() user = {} as User;
+
   @Output() selectedFriend = new EventEmitter<Friend>();
+
   listFriends: Friend[] = [];
+
+  private unsubscribe$ = new Subject<boolean>();
 
   constructor(private friendService: FriendService) {
   }
 
-  private unsubscribe$ = new Subject<boolean>();
-
   ngOnInit(): void {
-    this.friendService.getFriendByUser(this.user.uid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(res => {
-        this.listFriends = res;
-      });
+    if (this.user) {
+      this.friendService.getFriends(this.user)
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(res => {
+          this.listFriends = res;
+        });
+    }
   }
 
   getSelectedFriend(friend: Friend) {

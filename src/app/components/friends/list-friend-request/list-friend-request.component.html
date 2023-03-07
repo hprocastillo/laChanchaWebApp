@@ -1,16 +1,14 @@
 <app-title [title]="'Solicitudes de Amisstad'"></app-title>
 
-
 <ng-container *ngIf="listFriendsRequests.length > 0; else noResults">
   <ul class="list-group list-group-flush">
-    <li class="list-group-item p-1 border-0" *ngFor="let friendRequest of listFriendsRequests">
+    <li *ngFor="let friendRequest of listFriendsRequests" class="list-group-item p-1 border-0">
 
       <app-list-friend-request-item [friendRequest]="friendRequest"></app-list-friend-request-item>
 
     </li>
   </ul>
 </ng-container>
-
 
 <ng-template #noResults>
   <ngb-alert [dismissible]="false" [type]="'success'">

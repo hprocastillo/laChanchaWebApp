@@ -1,9 +1,14 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {environment} from '../environments/environment';
+import {getAuth, provideAuth} from '@angular/fire/auth';
+import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {getStorage, provideStorage} from '@angular/fire/storage';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {HomeComponent} from './components/home/home.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {LoginComponent} from './components/login/login.component';
@@ -20,11 +25,7 @@ import {ButtonBarComponent} from './components/buttons/button-bar/button-bar.com
 import {ButtonComponent} from './components/buttons/button/button.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ListBagsItemComponent} from './components/bags/list-bags-item/list-bags-item.component';
-import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
-import {environment} from '../environments/environment';
-import {provideAuth, getAuth} from '@angular/fire/auth';
-import {provideFirestore, getFirestore} from '@angular/fire/firestore';
-import {provideStorage, getStorage} from '@angular/fire/storage';
+
 import {ListExpensesItemComponent} from './components/expenses/list-expenses-item/list-expenses-item.component';
 import {ExpenseReceiptComponent} from './components/expenses/expense-receipt/expense-receipt.component';
 import {ButtonSaveLoadingComponent} from './components/buttons/button-save-loading/button-save-loading.component';
@@ -36,18 +37,17 @@ import {
   ListFriendRequestItemComponent
 } from './components/friends/list-friend-request-item/list-friend-request-item.component';
 import {SearchFriendComponent} from './components/friends/search-friend/search-friend.component';
-import {FriendsComponent} from './components/friends/friends/friends.component';
 import {SearchFriendItemComponent} from './components/friends/search-friend-item/search-friend-item.component';
 import {FilterFriendsPipe} from './pipes/filter-friends.pipe';
 import {ShareBagComponent} from './components/bags/share-bag/share-bag.component';
 import {
   NotificationsFriendsComponent
-} from './components/friends/notifications-friends/notifications-friends.component';
-import {NotificationsBagsComponent} from './components/bags/notifications-bags/notifications-bags.component';
-import { ShareBagRequestComponent } from './components/bags/share-bag-request/share-bag-request.component';
-import { ShareBagRequestItemComponent } from './components/bags/share-bag-request-item/share-bag-request-item.component';
-import { BagsComponent } from './components/bags/bags/bags.component';
-import { TitleComponent } from './components/title/title.component';
+} from './components/notifications/notifications-friends/notifications-friends.component';
+import {NotificationsBagsComponent} from './components/notifications/notifications-bags/notifications-bags.component';
+import {TitleComponent} from './components/title/title.component';
+import {ShareBagItemComponent} from './components/bags/share-bag-item/share-bag-item.component';
+import {ListBagsRequestComponent} from './components/bags/list-bags-request/list-bags-request.component';
+import {ListBagsRequestItemComponent} from './components/bags/list-bags-request-item/list-bags-request-item.component';
 
 @NgModule({
   declarations: [
@@ -76,16 +76,16 @@ import { TitleComponent } from './components/title/title.component';
     ListFriendRequestComponent,
     ListFriendRequestItemComponent,
     SearchFriendComponent,
-    FriendsComponent,
     SearchFriendItemComponent,
     FilterFriendsPipe,
     ShareBagComponent,
     NotificationsFriendsComponent,
     NotificationsBagsComponent,
-    ShareBagRequestComponent,
-    ShareBagRequestItemComponent,
-    BagsComponent,
     TitleComponent,
+    ShareBagItemComponent,
+    ListBagsRequestComponent,
+    ListBagsRequestItemComponent,
+    ListBagsRequestComponent,
   ],
   imports: [
     BrowserModule,

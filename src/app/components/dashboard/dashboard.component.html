@@ -1,19 +1,17 @@
 <ng-container *ngIf="authService.user$ | async as user">
 
-  <!-- BAGS TEMPLATE -->
-  <app-bags
-    *ngIf="bagsTemplate"
+  <!-- LIST BAGS TEMPLATE -->
+  <app-list-bags
+    *ngIf="listBagsTemplate"
     [user]="user"
     (selectedBag)="getSelectedBag($event)"
-    (btnShareBagRequest)="showShareBagRequest()"
-  ></app-bags>
-
+  ></app-list-bags>
 
   <!-- NEW BAG TEMPLATE -->
   <app-new-bag
     *ngIf="newBagTemplate"
     [user]="user"
-    (btnBack)="showBagsTemplate()"
+    (btnCancel)="showListBagsTemplate()"
   ></app-new-bag>
 
   <!-- VIEW BAG TEMPLATE -->
@@ -21,22 +19,25 @@
     *ngIf="viewBagTemplate"
     [user]="user"
     [bag]="selectedBag"
-    (btnBack)="showBagsTemplate()"
-    (btnShareBag)="showShareBag()"
+    (btnBack)="showListBagsTemplate()"
+    (btnShareBag)="showShareBagTemplate()"
   ></app-view-bag>
 
   <!-- SHARE BAG TEMPLATE -->
   <app-share-bag
     *ngIf="shareBagTemplate"
     [user]="user"
-    [bag]="selectedBag"
   ></app-share-bag>
 
-  <!-- SHARE BAG REQUEST TEMPLATE -->
-  <app-share-bag-request
-    *ngIf="shareBagRequestTemplate"
+
+  <!-------------------------------------------------->
+  <!--------------- FRIENDS TEMPLATE ----------------->
+  <!-- LIST FRIENDS TEMPLATE -->
+  <app-list-friends
+    *ngIf="listFriendsTemplate"
     [user]="user"
-  ></app-share-bag-request>
+    (selectedFriend)="getSelectedFriend($event)"
+  ></app-list-friends>
 
 
   <!-- NEW EXPENSE TEMPLATE -->
@@ -44,29 +45,8 @@
     *ngIf="newExpenseTemplate"
     [user]="user"
     [bag]="selectedBag"
-    (btnBackToViewBag)="showViewBagTemplate()"
+    (btnCancel)="showViewBagTemplate()"
   ></app-new-expense>
-
-  <!-- FRIENDS TEMPLATE -->
-  <app-friends
-    *ngIf="friendsTemplate"
-    [user]="user"
-    (selectedFriend)="getSelectedFriend($event)"
-    (btnFriendRequest)="showListFriendsRequest()"
-  ></app-friends>
-
-  <!-- LIST FRIENDS REQUEST -->
-  <app-list-friend-request
-    *ngIf="friendsRequestTemplate"
-    [user]="user"
-  ></app-list-friend-request>
-
-  <!-- VIEW FRIEND TEMPLATE -->
-  <app-view-friend
-    *ngIf="viewFriendTemplate"
-    [user]="user"
-    [friend]="selectedFriend"
-  ></app-view-friend>
 
   <!-- SEARCH FRIEND TEMPLATE -->
   <app-search-friend
@@ -75,25 +55,28 @@
   ></app-search-friend>
 
 
-  <!-- BUTTON BAR TEMPLATE -->
+  <!-- BUTTON BAR -->
   <app-button-bar
     *ngIf="buttonBarTemplate"
     [user]="user"
-
-    [bagsTemplate]="bagsTemplate"
+    [listBagsTemplate]="listBagsTemplate"
     [viewBagTemplate]="viewBagTemplate"
     [shareBagTemplate]="shareBagTemplate"
-    [shareBagRequestTemplate]="shareBagRequestTemplate"
-    [friendsTemplate]="friendsTemplate"
-    [friendsRequestTemplate]="friendsRequestTemplate"
-    [searchFriendTemplate]="searchFriendTemplate"
+    [listBagsRequestTemplate]="listBagsRequestTemplate"
 
-    (btnBags)="showBagsTemplate()"
+    [listFriendsTemplate]="listFriendsTemplate"
+    [listFriendsRequestTemplate]="listFriendsRequestTemplate"
+    [searchFriendTemplate]="searchFriendTemplate"
+    [viewFriendsTemplate]="viewFriendTemplate"
+
+    (btnListBags)="showListBagsTemplate()"
     (btnNewBag)="showNewBagTemplate()"
     (btnViewBag)="showViewBagTemplate()"
+
+    (btnListFriends)="showListFriendsTemplate()"
+    (btnSearchFriends)="showSearchFriendsTemplate()"
+
     (btnNewExpense)="showNewExpenseTemplate()"
-    (btnFriends)="showFriendsTemplate()"
-    (btnSearchFriend)="showSearchFriend()"
   ></app-button-bar>
 
 </ng-container>

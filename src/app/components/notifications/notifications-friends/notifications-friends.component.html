@@ -1,7 +1,7 @@
 <ng-container *ngIf="listFriendsRequest.length > 0">
 
-  <ngb-alert [dismissible]="false" [animation]="true" [type]="'warning'">
-    <p class="m-0" style="cursor: pointer" (click)="goFriendRequest()">Tienes
+  <ngb-alert [animation]="true" [dismissible]="false" [type]="'warning'">
+    <p class="m-0" style="cursor: pointer" (click)="goListFriendsRequest()">Tienes
       <strong>{{listFriendsRequest.length}}</strong> solicitudes de amistad.</p>
   </ngb-alert>
 

@@ -1,16 +1,15 @@
-<!-- BUTTON REQUEST BADGE -->
+<!-- BUTTON FRIENDS - NOTIFICATION REQUEST -->
 <ng-container *ngIf="listRequests.length > 0; else noRequests">
-  <button type="button" class="btn btn-warning">
+  <button class="btn btn-warning" type="button">
     <i class="bi bi-people-fill me-1"></i>
     Amigos
     <span class="badge text-bg-danger ms-1">{{listRequests.length}}</span>
   </button>
 </ng-container>
 
-
-<!-- BUTTON FRIENDS -->
+<!-- BUTTON FRIENDS - NO NOTIFICATION -->
 <ng-template #noRequests>
-  <button type="button" class="btn btn-warning">
+  <button class="btn btn-warning" type="button">
     <i class="bi bi-people-fill me-1"></i>
     Amigos
   </button>

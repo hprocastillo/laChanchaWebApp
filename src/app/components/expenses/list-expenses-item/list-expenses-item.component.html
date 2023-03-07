@@ -6,7 +6,7 @@
   <div class="w-75">
     <p class="m-1 small text-muted">
       <i class="bi bi-person-circle me-1"></i>
-      {{expense.userDisplayName | titlecase}}
+      {{expense.uDisplayName | titlecase}}
     </p>
     <p class="m-1 small text-muted">
       <i class="bi bi-calendar2-week me-1"></i>
@@ -19,32 +19,31 @@
   </div>
 </div>
 
-
 <!-- MODAL -->
 <ng-template #modal let-modal>
   <div class="modal-body text-center">
     <p class="fw-bold">{{expense.description}}</p>
-    <img *ngIf="expense.receiptUrl" style="max-width: 300px" [src]="[expense.receiptUrl]" alt="">
-    <p *ngIf="!expense.receiptUrl">No hay recibo adjunto.</p>
+    <img *ngIf="expense.receiptURL" [src]="[expense.receiptURL]" alt="" style="max-width: 300px">
+    <p *ngIf="!expense.receiptURL">No hay recibo adjunto.</p>
   </div>
 
   <div class="modal-footer d-flex justify-content-center">
     <!-- BUTTON CANCEL -->
     <app-button
       (click)="modal.dismiss()"
-      [type]="'button'"
       [class]="'btn btn-secondary me-2'"
       [icon]="'bi bi-x-circle-fill me-1'"
       [label]="'Salir'"
+      [type]="'button'"
     ></app-button>
 
     <!-- BUTTON DELETE -->
     <app-button
       (click)="deleteExpense(expense, bag)"
-      [type]="'button'"
       [class]="'btn btn-danger'"
       [icon]="'bi bi-trash-fill me-1'"
       [label]="'Borrar'"
+      [type]="'button'"
     ></app-button>
   </div>
 </ng-template>

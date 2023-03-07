@@ -1,0 +1,57 @@
+<div class="shadow p-2 mb-2 bg-body-tertiary rounded border-0">
+  <div class="w-100 d-flex justify-content-between">
+
+    <div class="w-75 d-flex justify-content-start">
+      <img alt="" class="rounded-circle" referrerpolicy="no-referrer"
+           src="{{friend.gPhotoURL}}" style="width: 48px">
+      <p class="m-auto ms-2">{{friend.gDisplayName | titlecase}}</p>
+    </div>
+
+    <div class="w-25 text-end">
+      <app-button
+        (click)="openModalRequest(modalRequest)"
+        [class]="'btn btn-warning mt-1'"
+        [icon]="'bi bi-share-fill'"
+        [type]="'button'"
+      ></app-button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL REQUEST -->
+<ng-template #modalRequest let-modal>
+  <div class="modal-body">
+    <p class="lead fw-bold">Compartir Chancha con:</p>
+
+    <div class="d-flex justify-content-start">
+      <img alt="" class="rounded-circle me-2" referrerpolicy="no-referrer"
+           src="{{friend.gPhotoURL}}"
+           style="width: 48px">
+      <p class="mt-2">{{friend.gDisplayName}}</p>
+    </div>
+
+    <ngb-alert *ngIf="msgError" [dismissible]="false" [type]="'danger'" class="mt-3">
+      <strong>Atencion! </strong>{{msgError}}
+    </ngb-alert>
+
+  </div>
+  <div class="modal-footer d-flex justify-content-center">
+    <!-- BUTTON CANCEL -->
+    <app-button
+      (click)="modal.dismiss()"
+      [class]="'btn btn-danger me-2'"
+      [icon]="'bi bi-x-circle-fill me-1'"
+      [label]="'No'"
+      [type]="'button'"
+    ></app-button>
+
+    <!-- BUTTON REQUEST -->
+    <app-button
+      (click)="shareBag(bag,friend)"
+      [class]="'btn btn-primary'"
+      [icon]="'bi bi-envelope-fill me-1'"
+      [label]="'Enviar'"
+      [type]="'button'"
+    ></app-button>
+  </div>
+</ng-template>

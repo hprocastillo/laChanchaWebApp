@@ -1,0 +1,66 @@
+<!-- HEADER -->
+<div class="row">
+  <div class="col-12">
+    <p class="fs-5 border-bottom">GASTOS</p>
+  </div>
+</div>
+
+<!-- SELECT MONTH -->
+<div class="row mb-3">
+  <div class="col-6">
+    <select class="form-select" [value]="currentMonth"
+            (change)="getSelectedMonth($event.target)">
+      <option value="0">ENERO</option>
+      <option value="1">FEBRERO</option>
+      <option value="2">MARZO</option>
+      <option value="3">ABRIL</option>
+      <option value="4">MAYO</option>
+      <option value="5">JUNIO</option>
+      <option value="6">JULIO</option>
+      <option value="7">AGOSTO</option>
+      <option value="8">SEPTIEMBRE</option>
+      <option value="9">OCTUBRE</option>
+      <option value="10">NOVIEMBRE</option>
+      <option value="11">DICIEMBRE</option>
+    </select>
+  </div>
+  <div class="col-6 text-end">
+    <p class="fs-5 fw-bold">
+      <app-expenses-amount-by-month
+        [firebaseUser]="firebaseUser"
+        [currentMonth]="currentMonth"
+      ></app-expenses-amount-by-month>
+    </p>
+  </div>
+</div>
+
+<!-- LIST EXPENSES -->
+<div class="row mb-3">
+  <div class="col-12">
+    <ul class="list-group list-group-flush" *ngFor="let expense of listExpenses | filterMonth:currentMonth">
+
+      <li class="list-group-item p-1 mb-3 cursor-pointer" (click)="getViewExpense(expense)">
+        <app-expenses-list-item [expense]="expense"></app-expenses-list-item>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="row fixed-bottom bg-white p-3">
+  <div class="col-12 d-flex justify-content-between">
+
+    <!-- BTN BACK -->
+    <button type="button" class="btn btn-primary rounded-circle" [routerLink]="'/dashboard'">
+      <i class="bi bi-arrow-90deg-left fs-1"></i>
+    </button>
+
+    <!-- BTN NEW -->
+    <button type="button" class="btn btn-primary rounded-circle" (click)="getTemplate('EXPENSES-NEW')">
+      <i class="bi bi-plus-lg fs-1"></i>
+    </button>
+
+  </div>
+</div>

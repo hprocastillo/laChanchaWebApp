@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-8">
+    <p class="fw-bold m-0">{{expense.description}}</p>
+    <p class="small text-muted m-0">{{expense.createdAt.toMillis() | date:'fullDate'}}</p>
+  </div>
+  <div class="col-4 text-end">
+    <p class="fw-bold m-0">S/. {{expense.amount}}</p>
+  </div>
+</div>

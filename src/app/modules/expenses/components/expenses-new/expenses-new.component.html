@@ -1,0 +1,118 @@
+<!-- HEADER -->
+<div class="row">
+  <div class="col-12">
+    <p class="fs-5 border-bottom">NUEVO GASTO</p>
+  </div>
+</div>
+
+<!-- FORM -->
+<form [formGroup]="newExpenseForm" (ngSubmit)="onSubmit(firebaseUser)">
+
+  <!-- DESCRIPTION -->
+  <div class="form-floating mb-3">
+    <input
+      type="text"
+      class="form-control"
+      id="description-Input"
+      placeholder="Descripción"
+      formControlName="description"
+      required>
+    <label for="description-Input">Descripción</label>
+  </div>
+
+  <!-- AMOUNT -->
+  <div class="form-floating mb-3">
+    <input
+      type="number"
+      class="form-control"
+      id="amount-Input"
+      placeholder="Monto S/."
+      formControlName="amount"
+      required>
+    <label for="amount-Input">Monto S/.</label>
+  </div>
+
+  <!-- FIXED MONTHLY -->
+  <div class="form-check form-switch mb-5">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      role="switch"
+      (change)="getFixedMonthly($event.target)"
+      id="monthly-Input">
+    <label class="form-check-label" for="monthly-Input">Fijar como gasto mensual</label>
+  </div>
+
+  <!-- PHOTO -->
+  <ng-container *ngIf="receipt_preview && receipt_preview !== ''; else noPreview">
+    <div class="row mb-3">
+      <div class="col-12 text-center">
+        <p class="fs-5">VISTA PREVIA</p>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6 offset-3 text-center">
+        <div class="container-camera mb-3">
+          <input type="file" (change)="take_photo($event)" accept="image/*;capture=camera">
+          <img class="img-fluid" src="{{receipt_preview}}" alt="{{receipt_file.name}}">
+        </div>
+
+        <!-- BUTTON DELETE PREVIEW -->
+        <button
+          (click)="deletePreview()"
+          type="button"
+          class="btn btn-danger">
+          <i class="bi bi-trash-fill"></i>
+          Borrar
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noPreview>
+    <div class="row mb-3">
+      <div class="col-12 text-center">
+        <p class="fs-5">TOMAR FOTO DE RECIBO</p>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6 offset-3 text-center">
+        <div class="container-camera">
+          <input type="file" (change)="take_photo($event)" accept="image/*;capture=camera">
+          <img class="img-fluid" src="./assets/images/receipt.png" alt="Camera">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="text-muted small">(Click en la imagen para capturar nueva.)</p>
+      </div>
+    </div>
+  </ng-template>
+
+
+  <!-- FOOTER -->
+  <div class="row fixed-bottom bg-white p-3">
+    <div class="col-12 d-flex justify-content-between">
+
+      <!-- BTN CANCEL -->
+      <button type="reset" class="btn btn-danger rounded-circle" (click)="getTemplate('EXPENSES-LIST')">
+        <i class="bi bi-x-lg fs-1"></i>
+      </button>
+
+      <!-- BTN SAVE -->
+      <button *ngIf="!loadingEffect" type="submit" class="btn btn-success rounded-circle">
+        <i class="bi bi-hdd-fill fs-1"></i>
+      </button>
+
+      <!-- BTN SAVE with loading effect -->
+      <button *ngIf="loadingEffect" type="button" class="btn btn-success rounded-circle" disabled>
+        <span aria-hidden="true" class="spinner-border" role="status"></span>
+      </button>
+
+    </div>
+  </div>
+</form>

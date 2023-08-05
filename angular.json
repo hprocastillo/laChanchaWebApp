@@ -97,8 +97,18 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "laChanchaWebApp:build:production"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f376254c-ed17-464d-a97e-04a5154e93a3"
   }
 }

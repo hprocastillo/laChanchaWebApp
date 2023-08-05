@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lachanchaproject": {
+      "hosting": {
+        "laChanchaWebApp": [
+          "lachanchaproject"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lachanchaproject"
+  }
+}

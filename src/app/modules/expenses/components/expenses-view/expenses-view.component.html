@@ -1,0 +1,98 @@
+<!-- HEADER -->
+<div class="row">
+  <div class="col-12">
+    <p class="fs-5 pb-1 border-bottom">{{expense.description}}</p>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-8">
+    <p class="small text-muted mb-0">Fecha:</p>
+    <p class="fw-bold mt-0">{{expense.createdAt.toMillis() | date:'fullDate'}}</p>
+  </div>
+  <div class="col-4 text-end">
+    <p class="small text-muted mb-0">Monto:</p>
+    <p class="fw-bold mt-0">S/. {{expense.amount}}</p>
+  </div>
+</div>
+
+
+<div class="row mb-3">
+  <div class="col-6">
+    <p class="small text-muted mb-0">Gasto Fijo:</p>
+    <p class="fw-bold mt-0" *ngIf="expense.fixed">Si</p>
+    <p class="fw-bold mt-0" *ngIf="!expense.fixed">No</p>
+  </div>
+  <div class="col-6 text-end">
+    <p class="small text-muted mb-0">Gasto Compartido:</p>
+    <p class="fw-bold mt-0" *ngIf="expense.shared">Si</p>
+    <p class="fw-bold mt-0" *ngIf="!expense.shared">No</p>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12 text-center">
+    <img (click)="openModalPhoto(modalPhoto, expense.receiptURL)" class="img-fluid mb-3 cursor-pointer" style="max-height: 250px" src="{{expense.receiptURL}}" alt="{{expense.description}}">
+    <p class="text-muted">(Click en la imagen para agrandar).</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="row fixed-bottom bg-white p-3">
+  <div class="col-12 d-flex justify-content-between">
+
+    <!-- BTN BACK -->
+    <button type="button" class="btn btn-primary rounded-circle" (click)="getTemplate('EXPENSES-LIST')">
+      <i class="bi bi-arrow-90deg-left fs-1"></i>
+    </button>
+
+    <!-- BTN DELETE -->
+    <button type="button" class="btn btn-danger rounded-circle" (click)="openModalDelete(modalDelete)">
+      <i class="bi bi-trash fs-1"></i>
+    </button>
+
+    <!-- BTN EDIT -->
+    <button type="button" class="btn btn-primary rounded-circle" (click)="getTemplate('EXPENSES-EDIT')">
+      <i class="bi bi-pencil-square fs-1"></i>
+    </button>
+
+  </div>
+</div>
+
+
+<!-- MODAL DELETE -->
+<ng-template #modalDelete let-modal>
+  <div class="modal-body text-center">
+    <p class="lead">¿Desea eliminar el gasto <span class="fw-bold">{{expense.description}} ?</span></p>
+
+    <!-- BUTTON CANCEL -->
+    <button
+      type="button"
+      class="btn btn-secondary me-2"
+      (click)="modal.dismiss('Cross click')">
+      <i class="bi bi-x-circle-fill me-2"></i>
+      NO
+    </button>
+
+    <!-- BUTTON DELETE -->
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="deleteExpense(expense)">
+      <i class="bi bi-trash-fill me-2"></i>
+      SI
+    </button>
+
+  </div>
+</ng-template>
+
+<!-- MODAL PHOTO -->
+<ng-template #modalPhoto let-modal>
+  <div class="modal-header">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body text-center">
+    <img class="img-fluid" src="{{imageToZoom}}" alt="{{expense.description}}">
+  </div>
+</ng-template>

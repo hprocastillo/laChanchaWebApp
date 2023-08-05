@@ -1,0 +1,33 @@
+<ng-container *ngIf="authService.user$ | async as firebaseUser">
+
+  <!-- EXPENSES - LIST -->
+  <app-expenses-list
+    *ngIf="template === 'EXPENSES-LIST'"
+    [firebaseUser]="firebaseUser"
+    (outTemplate)="getTemplate($event)"
+    (expenseToView)="getViewExpense($event)"
+  ></app-expenses-list>
+
+  <!-- EXPENSES - NEW -->
+  <app-expenses-new
+    *ngIf="template === 'EXPENSES-NEW'"
+    [firebaseUser]="firebaseUser"
+    (outTemplate)="getTemplate($event)"
+  ></app-expenses-new>
+
+  <!-- EXPENSES - EDIT -->
+  <app-expenses-edit
+    *ngIf="template === 'EXPENSES-EDIT'"
+  ></app-expenses-edit>
+
+  <!-- EXPENSES - VIEW -->
+  <app-expenses-view
+    *ngIf="template === 'EXPENSES-VIEW'"
+    [expense]="expenseToView"
+    (outTemplate)="getTemplate($event)"
+  ></app-expenses-view>
+
+
+</ng-container>
+
+<ng-template #noLogged></ng-template>
